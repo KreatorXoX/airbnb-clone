@@ -6,17 +6,10 @@ export default function Logo() {
   const router = useRouter();
   return (
     <div
-      className="relative w-[75px] h-[50px] cursor-pointer"
+      className="relative w-[75px] h-[50px] cursor-pointer hidden md:block"
       onClick={() => router.push("/")}
     >
-      <Image
-        className="hidden md:inline-block "
-        src={"/images/logo.png"}
-        fill
-        sizes="75px"
-        alt="logo"
-        priority
-      />
+      <Image src={"/images/logo.png"} fill sizes="75px" alt="logo" priority />
       <span
         className={`font-logo absolute top-[22%] text-rose-500 left-14 text-xl hidden lg:block`}
       >

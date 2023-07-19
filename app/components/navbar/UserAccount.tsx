@@ -1,15 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiSolidUserCircle } from "react-icons/bi";
 import AccountItem from "./AccountItem";
 import { useRegisterModal } from "@/app/hooks/useRegistration";
+import { useOutsideClick } from "@/app/hooks/useOutsideClick";
 export default function UserAccount() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const registerOpen = useRegisterModal((state) => state.onOpen);
 
+  const menuRef = useOutsideClick(() => setIsOpen(false));
+
   return (
-    <div className="relative">
+    <div className="relative" ref={menuRef}>
       <div className="flex items-center gap-3">
         <div
           className="hidden md:block text-sm font-medium md:py-3 px-4 rounded-full

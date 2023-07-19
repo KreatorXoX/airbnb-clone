@@ -12,6 +12,7 @@ import Heading from "../Heading";
 import Input from "../inputs/Input";
 import { toast } from "react-hot-toast";
 import Button from "../Button";
+import { AnimatePresence } from "framer-motion";
 
 export default function RegisterModal() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -100,15 +101,20 @@ export default function RegisterModal() {
     </div>
   );
   return (
-    <Modal
-      disabled={isLoading}
-      isOpen={isOpen}
-      title="Register"
-      label="Continue"
-      onSubmit={handleSubmit(onSubmit)}
-      onClose={registerClose}
-      body={bodyContent}
-      footer={socialLogin}
-    />
+    <AnimatePresence>
+      {isOpen && (
+        <Modal
+          key={"RegisterModal"}
+          disabled={isLoading}
+          isOpen={isOpen}
+          title="Register"
+          label="Continue"
+          onSubmit={handleSubmit(onSubmit)}
+          onClose={registerClose}
+          body={bodyContent}
+          footer={socialLogin}
+        />
+      )}
+    </AnimatePresence>
   );
 }

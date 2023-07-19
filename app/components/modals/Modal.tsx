@@ -69,21 +69,16 @@ export default function Modal({
     >
       <motion.div
         key={label}
-        initial={{ y: 50 }}
+        initial={{ y: 200 }}
         animate={{ y: 0 }}
-        exit={{ x: 50 }}
+        exit={{ y: 200, opacity: 0 }}
+        transition={{ duration: 0.25 }}
         onClick={(e) => e.stopPropagation()}
         className="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 mx-auto h-full lg:h-auto md:h-auto"
       >
         {/* content */}
-        <div
-          // className={`
-          // // ${showModal ? "translate-y-0" : "translate-y-full"}
-          // // ${showModal ? "opacity-100" : "opacity-0"}
-          // translate duration-300 h-full`}
-          className="h-full"
-        >
-          <div className="translate h-full lg:h-auto md:h-auto border-0 md:rounded-lg shadow-md relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <div className="h-full">
+          <div className="h-full lg:h-auto md:h-auto border-0 md:rounded-lg shadow-md relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/* Header */}
             <div className="flex items-center justify-center p-6 rounded-t relative border-b">
               <button

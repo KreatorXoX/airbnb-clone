@@ -1,10 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
-import { Poppins } from "next/font/google";
+import { Nunito, Poppins } from "next/font/google";
 
 import Navbar from "./components/navbar/Navbar";
-import Modal from "./components/modals/Modal";
+
 import RegisterModal from "./components/modals/RegisterModal";
 import ToasterProvider from "./providers/ToasterProvider";
 
@@ -30,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${font.variable} ${fontLogo.variable}`}>
+    <html lang="en">
       <body className="font-general">
         <Navbar />
         {children}
