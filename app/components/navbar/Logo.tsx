@@ -5,9 +5,12 @@ import { useRouter } from "next/navigation";
 export default function Logo() {
   const router = useRouter();
   return (
-    <div className="relative w-[75px] h-[50px]">
+    <div
+      className="relative w-[75px] h-[50px] cursor-pointer"
+      onClick={() => router.push("/")}
+    >
       <Image
-        className="hidden md:inline-block cursor-pointer"
+        className="hidden md:inline-block "
         src={"/images/logo.png"}
         fill
         sizes="75px"
