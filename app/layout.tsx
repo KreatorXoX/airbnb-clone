@@ -6,6 +6,7 @@ import { Poppins } from "next/font/google";
 import Navbar from "./components/navbar/Navbar";
 import Modal from "./components/modals/Modal";
 import RegisterModal from "./components/modals/RegisterModal";
+import ToasterProvider from "./providers/ToasterProvider";
 
 export const metadata: Metadata = {
   title: "Airbnb Clone",
@@ -34,6 +35,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <RegisterModal />
+        <ToasterProvider />
       </body>
     </html>
   );
