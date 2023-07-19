@@ -1,6 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
+import { Poppins } from "next/font/google";
+
 import Navbar from "./components/navbar/Navbar";
 
 export const metadata: Metadata = {
@@ -9,8 +11,14 @@ export const metadata: Metadata = {
     "This is a fullstack Airbnb clone that uses next.js 13 app directory",
 };
 
+const fontLogo = Poppins({
+  subsets: ["latin"],
+  variable: "--font-logo",
+  weight: "600",
+});
 const font = Nunito({
   subsets: ["latin"],
+  variable: "--font-general",
 });
 
 export default function RootLayout({
@@ -19,8 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={font.className}>
+    <html lang="en" className={`${font.variable} ${fontLogo.variable}`}>
+      <body className="font-general">
         <Navbar />
         {children}
       </body>

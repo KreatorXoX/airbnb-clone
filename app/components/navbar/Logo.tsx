@@ -1,22 +1,21 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Poppins } from "next/font/google";
 
-const font = Poppins({ subsets: ["latin"], weight: "600" });
 export default function Logo() {
   const router = useRouter();
   return (
-    <div className="relative">
+    <div className="relative w-[75px] h-[50px]">
       <Image
         className="hidden md:inline-block cursor-pointer"
         src={"/images/logo.png"}
-        height={75}
-        width={75}
+        fill
+        sizes="75px"
         alt="logo"
+        priority
       />
       <span
-        className={`${font.className} absolute top-[22%] text-rose-500 left-14 text-xl hidden lg:block`}
+        className={`font-logo absolute top-[22%] text-rose-500 left-14 text-xl hidden lg:block`}
       >
         airbnb
       </span>

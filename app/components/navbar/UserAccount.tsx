@@ -1,10 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiSolidUserCircle } from "react-icons/bi";
 import AccountItem from "./AccountItem";
 export default function UserAccount() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    let handler = () => {
+      setIsOpen(false);
+    };
+
+    document.addEventListener("mousedown", handler);
+
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
   return (
     <div className="relative ">
       <div className="flex items-center gap-3">
@@ -26,7 +37,7 @@ export default function UserAccount() {
         </div>
       </div>
       {isOpen && (
-        <div className="absolute rounded-xl w-[37vw] shadow-md bg-white overflow-hidden right-0 top-14 text-sm md:text-base">
+        <div className="absolute rounded-xl min-w-[15rem] max-w-[30vw] shadow-md bg-white overflow-hidden right-0 top-14 text-sm md:text-base">
           <div className="flex flex-col cursor-pointer">
             <>
               <AccountItem onClick={() => {}} label="Sign up" />
