@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import Button from "../Button";
 import { AnimatePresence, motion } from "framer-motion";
+import { createPortal } from "react-dom";
 type Props = {
   onClose: () => void;
   onSubmit: () => void;
@@ -65,7 +66,7 @@ export default function Modal({
   return (
     <div
       onClick={handleClose}
-      className="justify-center items-center flex overflow-x-hidden overflow-y-auto inset-0 fixed z-50 outline-none focus:outline-none bg-neutral-500/70"
+      className="justify-center items-center flex overflow-hidden inset-0 fixed z-50 outline-none focus:outline-none bg-neutral-500/70"
     >
       <motion.div
         key={label}

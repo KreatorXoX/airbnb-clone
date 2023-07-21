@@ -5,9 +5,11 @@ import { BiSolidUserCircle } from "react-icons/bi";
 import AccountItem from "./AccountItem";
 import { useRegisterModal } from "@/app/hooks/useRegistration";
 import { useOutsideClick } from "@/app/hooks/useOutsideClick";
+import { useLoginModal } from "@/app/hooks/useLogin";
 export default function UserAccount() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const registerOpen = useRegisterModal((state) => state.onOpen);
+  const loginOpen = useLoginModal((state) => state.onOpen);
 
   const menuRef = useOutsideClick(() => setIsOpen(false));
 
@@ -35,8 +37,8 @@ export default function UserAccount() {
         <div className="absolute rounded-xl min-w-[15rem] max-w-[30vw] shadow-md bg-white overflow-hidden right-0 top-14 text-sm md:text-base">
           <div className="flex flex-col cursor-pointer">
             <>
-              <AccountItem onClick={() => registerOpen()} label="Sign up" />
-              <AccountItem onClick={() => {}} label="Log in" />
+              <AccountItem onClick={registerOpen} label="Sign up" />
+              <AccountItem onClick={loginOpen} label="Log in" />
               <div className="w-full bg-gray-200 h-[1px] my-2"></div>
               <AccountItem onClick={() => {}} label="Airbnb your home" />
               <AccountItem onClick={() => {}} label="Log in" />
