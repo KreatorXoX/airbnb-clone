@@ -1,10 +1,15 @@
 "use client";
+import { User } from "@prisma/client";
 import ClientContainer from "../ClientContainer";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserAccount from "./UserAccount";
 
-export default function Navbar() {
+type Props = {
+  currentUser?: User | null;
+};
+
+export default function Navbar({ currentUser }: Props) {
   return (
     <nav className=" fixed w-full bg-white shadow-sm">
       <div className="py-4 border-b-[1px] select-none">
@@ -12,7 +17,7 @@ export default function Navbar() {
           <div className="flex flex-row items-center justify-between gap-2 md:gap-0">
             <Logo />
             <Search />
-            <UserAccount />
+            <UserAccount currentUser={currentUser} />
           </div>
         </ClientContainer>
       </div>

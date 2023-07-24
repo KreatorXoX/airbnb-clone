@@ -14,6 +14,7 @@ import Input from "../inputs/Input";
 import { toast } from "react-hot-toast";
 import Button from "../Button";
 import { AnimatePresence } from "framer-motion";
+import { signIn } from "next-auth/react";
 
 export default function RegisterModal() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -83,13 +84,14 @@ export default function RegisterModal() {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
+
       <Button
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => {}}
+        onClick={() => signIn("github")}
       />
       <div className="flex flex-row justify-center items-center gap-2 text-neutral-500 text-center mt-4 font-light">
         <div>Already have an account?</div>

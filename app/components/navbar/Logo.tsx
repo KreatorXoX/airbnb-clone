@@ -1,4 +1,5 @@
 "use client";
+import { fontLogo } from "@/app/fonts";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -11,7 +12,7 @@ export default function Logo() {
     >
       <Image src={"/images/logo.png"} fill sizes="75px" alt="logo" priority />
       <span
-        className={`font-logo absolute top-[22%] text-rose-500 left-14 text-xl hidden lg:block`}
+        className={`${fontLogo.className} absolute top-[22%] text-rose-500 left-14 text-xl hidden lg:block`}
       >
         airbnb
       </span>

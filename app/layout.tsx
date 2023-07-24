@@ -1,12 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Nunito, Poppins } from "next/font/google";
 
 import Navbar from "./components/navbar/Navbar";
 
 import RegisterModal from "./components/modals/RegisterModal";
 import ToasterProvider from "./providers/ToasterProvider";
 import LoginModal from "./components/modals/LoginModal";
+import getCurrentUser from "./actions/getCurrentUser";
+import { font } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Airbnb Clone",
@@ -14,25 +15,16 @@ export const metadata: Metadata = {
     "This is a fullstack Airbnb clone that uses next.js 13 app directory",
 };
 
-const fontLogo = Poppins({
-  subsets: ["latin"],
-  variable: "--font-logo",
-  weight: "600",
-});
-const font = Nunito({
-  subsets: ["latin"],
-  variable: "--font-general",
-});
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const currentUser = await getCurrentUser();
   return (
     <html lang="en">
-      <body className="font-general">
-        <Navbar />
+      <body className={font.className}>
+        <Navbar currentUser={currentUser} />
         {children}
         <RegisterModal />
         <LoginModal />
@@ -40,4 +32,15 @@ export default function RootLayout({
       </body>
     </html>
   );
+}
+function Poppins(arg0: {
+  subsets: string[];
+  variable: string;
+  weight: string;
+}) {
+  throw new Error("Function not implemented.");
+}
+
+function Nunito(arg0: { subsets: string[]; variable: string }) {
+  throw new Error("Function not implemented.");
 }
