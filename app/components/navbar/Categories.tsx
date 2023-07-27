@@ -6,7 +6,7 @@ import { GiWindmill } from "react-icons/gi";
 import { MdOutlineVilla } from "react-icons/md";
 import CategoryBox from "./CategoryBox";
 import { useSearchParams } from "next/navigation";
-
+import { motion } from "framer-motion";
 export const dummy_categories = [
   {
     label: "Beach",
@@ -29,16 +29,30 @@ export default function Categories() {
 
   return (
     <ClientContainer>
-      <div className="flex items-center justify-between pt-4 overflow-x-auto">
+      <div className="flex items-center justify-between pt-4 overflow-x-hidden">
         {dummy_categories.map((category) => {
           const selected = params?.get("category") === category.label;
           return (
-            <CategoryBox
+            <div
               key={category.label}
-              label={category.label}
-              icon={category.icon}
-              selected={selected}
-            />
+              className={`${
+                selected ? "text-neutral-800" : "text-neutral-500"
+              } relative`}
+            >
+              <CategoryBox
+                label={category.label}
+                icon={category.icon}
+                selected={selected}
+              />
+
+              {selected && (
+                <motion.span
+                  layoutId="bgNavigation"
+                  className="absolute inset-0 -z-10  border-green-600 border-b-2"
+                  transition={{ type: "spring", bounce: 0.2, duration: 1 }}
+                ></motion.span>
+              )}
+            </div>
           );
         })}
       </div>
