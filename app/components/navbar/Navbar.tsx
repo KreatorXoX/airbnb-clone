@@ -4,6 +4,7 @@ import ClientContainer from "../ClientContainer";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserAccount from "./UserAccount";
+import Categories from "./Categories";
 
 type Props = {
   currentUser?: User | null;
@@ -21,6 +22,7 @@ export default function Navbar({ currentUser }: Props) {
           </div>
         </ClientContainer>
       </div>
+      <Categories />
     </nav>
   );
 }

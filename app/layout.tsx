@@ -33,14 +33,3 @@ export default async function RootLayout({
     </html>
   );
 }
-function Poppins(arg0: {
-  subsets: string[];
-  variable: string;
-  weight: string;
-}) {
-  throw new Error("Function not implemented.");
-}
-
-function Nunito(arg0: { subsets: string[]; variable: string }) {
-  throw new Error("Function not implemented.");
-}
