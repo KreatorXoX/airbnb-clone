@@ -22,7 +22,7 @@ export default function UserAccount({ currentUser }: Props) {
   const menuRef = useOutsideClick(() => setIsOpen(false));
 
   return (
-    <div className="relative" ref={menuRef}>
+    <div className="relative hidden md:inline-block" ref={menuRef}>
       <div className="flex items-center gap-3">
         <div
           className="hidden md:block text-sm font-medium md:py-3 px-4 rounded-full

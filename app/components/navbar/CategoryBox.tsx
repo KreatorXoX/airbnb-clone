@@ -39,7 +39,7 @@ export default function CategoryBox({ icon: Icon, label, selected }: Props) {
     flex flex-col items-center justify-center gap-2 p-3 border-b-2 border-transparent hover:text-neutral-800 transition cursor-pointer`}
     >
       <Icon size={26} />
-      <div className="font-medium text-sm">{label}</div>
+      <div className="font-medium text-xs md:text-sm">{label}</div>
     </div>
   );
 }

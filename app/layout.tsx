@@ -8,6 +8,7 @@ import ToasterProvider from "./providers/ToasterProvider";
 import LoginModal from "./components/modals/LoginModal";
 import getCurrentUser from "./actions/getCurrentUser";
 import { font } from "./fonts";
+import SmallUserAccount from "./components/navbar/SmallUserAccount";
 
 export const metadata: Metadata = {
   title: "Airbnb Clone",
@@ -21,6 +22,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const currentUser = await getCurrentUser();
+
   return (
     <html lang="en">
       <body className={font.className}>
@@ -29,6 +31,11 @@ export default async function RootLayout({
         <RegisterModal />
         <LoginModal />
         <ToasterProvider />
+        <div className="absolute min-h-screen top-0 w-full">
+          <div className="relative min-h-screen ">
+            <SmallUserAccount />
+          </div>
+        </div>
       </body>
     </html>
   );

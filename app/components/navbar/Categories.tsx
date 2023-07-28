@@ -23,13 +23,73 @@ export const dummy_categories = [
     icon: MdOutlineVilla,
     desciption: "This property has a modern design",
   },
+  {
+    label: "Beach1",
+    icon: TbBeach,
+    desciption: "This property is close to the beach",
+  },
+  {
+    label: "Windmills1",
+    icon: GiWindmill,
+    desciption: "This property has windmills",
+  },
+  {
+    label: "Modern1",
+    icon: MdOutlineVilla,
+    desciption: "This property has a modern design",
+  },
+  {
+    label: "Beach2",
+    icon: TbBeach,
+    desciption: "This property is close to the beach",
+  },
+  {
+    label: "Windmills2",
+    icon: GiWindmill,
+    desciption: "This property has windmills",
+  },
+  {
+    label: "Modern2",
+    icon: MdOutlineVilla,
+    desciption: "This property has a modern design",
+  },
+  {
+    label: "Beach3",
+    icon: TbBeach,
+    desciption: "This property is close to the beach",
+  },
+  {
+    label: "Windmills3",
+    icon: GiWindmill,
+    desciption: "This property has windmills",
+  },
+  {
+    label: "Modern3",
+    icon: MdOutlineVilla,
+    desciption: "This property has a modern design",
+  },
+  {
+    label: "Beach4",
+    icon: TbBeach,
+    desciption: "This property is close to the beach",
+  },
+  {
+    label: "Windmills4",
+    icon: GiWindmill,
+    desciption: "This property has windmills",
+  },
+  {
+    label: "Modern4",
+    icon: MdOutlineVilla,
+    desciption: "This property has a modern design",
+  },
 ];
 export default function Categories() {
   const params = useSearchParams();
 
   return (
     <ClientContainer>
-      <div className="flex items-center justify-between pt-4 overflow-x-hidden">
+      <div className="flex items-center justify-between pt-4 overflow-x-auto no-scrollbar">
         {dummy_categories.map((category) => {
           const selected = params?.get("category") === category.label;
           return (
