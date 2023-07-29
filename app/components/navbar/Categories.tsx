@@ -89,7 +89,7 @@ export default function Categories() {
 
   return (
     <ClientContainer>
-      <div className="flex items-center justify-between pt-4 overflow-x-auto no-scrollbar">
+      <div className="flex items-center justify-between pt-2 md:pt-4 overflow-x-scroll no-scrollbar whitespace-nowrap">
         {dummy_categories.map((category) => {
           const selected = params?.get("category") === category.label;
           return (
@@ -108,7 +108,7 @@ export default function Categories() {
               {selected && (
                 <motion.span
                   layoutId="bgNavigation"
-                  className="absolute inset-0 -z-10  border-green-600 border-b-2"
+                  className="absolute inset-0 -z-10 border-green-600 border-b-2"
                   transition={{ type: "spring", bounce: 0.2, duration: 1 }}
                 ></motion.span>
               )}

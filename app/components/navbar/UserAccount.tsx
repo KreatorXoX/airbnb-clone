@@ -25,7 +25,7 @@ export default function UserAccount({ currentUser }: Props) {
     <div className="relative hidden md:inline-block" ref={menuRef}>
       <div className="flex items-center gap-3">
         <div
-          className="hidden md:block text-sm font-medium md:py-3 px-4 rounded-full
+          className="hidden md:block text-sm font-medium px-4 rounded-full
   transition hover:bg-yellow-200/10 cursor-pointer
   "
         >
@@ -33,9 +33,9 @@ export default function UserAccount({ currentUser }: Props) {
         </div>
         <div
           onClick={() => setIsOpen((prev) => !prev)}
-          className="p-2 sm:p-4 md:py-1 md:px-2 border-[0.5px] flex items-center gap-3 rounded-full cursor-pointer transition hover:shadow-md"
+          className="px-2 py-1 border-[0.5px] flex items-center gap-2 rounded-full cursor-pointer transition hover:shadow-md"
         >
-          <AiOutlineMenu className="text-xl text-gray-500" />
+          <AiOutlineMenu className="text-gray-800" />
           <div className="hidden md:inline-block rounded-full">
             {currentUser?.image ? (
               <Image
@@ -46,7 +46,7 @@ export default function UserAccount({ currentUser }: Props) {
                 alt={`${currentUser.name}`}
               />
             ) : (
-              <BiSolidUserCircle className="text-gray-500 text-4xl" />
+              <BiSolidUserCircle className="text-gray-500" size={35} />
             )}
           </div>
         </div>

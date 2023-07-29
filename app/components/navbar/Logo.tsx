@@ -7,7 +7,7 @@ export default function Logo() {
   const router = useRouter();
   return (
     <div
-      className="relative w-[75px] h-[50px] cursor-pointer hidden md:block"
+      className="relative w-[75px] h-[50px] cursor-pointer hidden md:inline-block"
       onClick={() => router.push("/")}
     >
       <Image src={"/images/logo.png"} fill sizes="75px" alt="logo" priority />

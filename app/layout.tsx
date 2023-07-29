@@ -31,10 +31,8 @@ export default async function RootLayout({
         <RegisterModal />
         <LoginModal />
         <ToasterProvider />
-        <div className="absolute min-h-screen top-0 w-full">
-          <div className="relative min-h-screen ">
-            <SmallUserAccount />
-          </div>
+        <div className="absolute bottom-0 w-full md:hidden">
+          <SmallUserAccount />
         </div>
       </body>
     </html>
