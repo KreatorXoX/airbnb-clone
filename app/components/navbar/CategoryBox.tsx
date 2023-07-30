@@ -1,15 +1,15 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useCallback } from "react";
-import { IconType } from "react-icons";
+import Image from "next/image";
 
 type Props = {
-  icon: IconType;
+  iconUrl: string;
   label: string;
   selected?: boolean;
 };
 
-export default function CategoryBox({ icon: Icon, label, selected }: Props) {
+export default function CategoryBox({ iconUrl, label, selected }: Props) {
   const router = useRouter();
   const params = useSearchParams();
 
@@ -36,9 +36,17 @@ export default function CategoryBox({ icon: Icon, label, selected }: Props) {
       onClick={handleClick}
       className={`
       ${selected ? "" : " hover:border-b-2 hover:border-b-neutral-500 "}
-    flex flex-col items-center justify-center gap-2 p-2 md:p-3 border-b-2 border-transparent hover:text-neutral-800 transition cursor-pointer`}
+    flex flex-col items-center pb-1 px-1 justify-center group border-b-2 border-transparent hover:text-neutral-800 transition cursor-pointer
+     
+    `}
     >
-      <Icon size={26} />
+      <div
+        className={`${
+          selected ? "brightness-100" : "brightness-200"
+        } h-[32px] relative w-[32px] brightness-200 group-hover:brightness-100 transition`}
+      >
+        <Image src={iconUrl} fill alt={`${label}`} priority />
+      </div>
       <div className="font-medium text-xs md:text-sm">{label}</div>
     </div>
   );

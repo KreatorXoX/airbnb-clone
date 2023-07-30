@@ -1,9 +1,7 @@
 "use client";
 import React, { useRef, useState } from "react";
 import ClientContainer from "../ClientContainer";
-import { TbBeach } from "react-icons/tb";
-import { GiWindmill } from "react-icons/gi";
-import { MdOutlineVilla } from "react-icons/md";
+
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import CategoryBox from "./CategoryBox";
 import { useSearchParams } from "next/navigation";
@@ -13,84 +11,8 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
+import { categories } from "@/utils/categories";
 
-export const dummy_categories = [
-  {
-    label: "Beach",
-    icon: TbBeach,
-    desciption: "This property is close to the beach",
-  },
-  {
-    label: "Windmills",
-    icon: GiWindmill,
-    desciption: "This property has windmills",
-  },
-  {
-    label: "Modern",
-    icon: MdOutlineVilla,
-    desciption: "This property has a modern design",
-  },
-  {
-    label: "Beach1",
-    icon: TbBeach,
-    desciption: "This property is close to the beach",
-  },
-  {
-    label: "Windmills1",
-    icon: GiWindmill,
-    desciption: "This property has windmills",
-  },
-  {
-    label: "Modern1",
-    icon: MdOutlineVilla,
-    desciption: "This property has a modern design",
-  },
-  {
-    label: "Beach2",
-    icon: TbBeach,
-    desciption: "This property is close to the beach",
-  },
-  {
-    label: "Windmills2",
-    icon: GiWindmill,
-    desciption: "This property has windmills",
-  },
-  {
-    label: "Modern2",
-    icon: MdOutlineVilla,
-    desciption: "This property has a modern design",
-  },
-  {
-    label: "Beach3",
-    icon: TbBeach,
-    desciption: "This property is close to the beach",
-  },
-  {
-    label: "Windmills3",
-    icon: GiWindmill,
-    desciption: "This property has windmills",
-  },
-  {
-    label: "Modern3",
-    icon: MdOutlineVilla,
-    desciption: "This property has a modern design",
-  },
-  {
-    label: "Beach4",
-    icon: TbBeach,
-    desciption: "This property is close to the beach",
-  },
-  {
-    label: "Windmills4",
-    icon: GiWindmill,
-    desciption: "This property has windmills",
-  },
-  {
-    label: "Modern4",
-    icon: MdOutlineVilla,
-    desciption: "This property has a modern design",
-  },
-];
 export default function Categories() {
   const params = useSearchParams();
   const [leftArrowVisible, setLeftArrowVisible] = useState(false);
@@ -133,15 +55,15 @@ export default function Categories() {
   };
   return (
     <ClientContainer>
-      <div className="relative flex items-center">
+      <div className="relative flex items-center md:py-4">
         <AnimatePresence>
           {leftArrowVisible && (
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
+              exit={{ opacity: 0, x: -10 }}
               transition={{ duration: 0.45 }}
-              className="absolute left-0 z-10 bg-white h-[4.25rem] md:h-20 top-2 md:top-4 w-10 flex items-center justify-center"
+              className="absolute -left-2 z-10 bg-white h-[3.5rem] top-1 md:top-6  md:h-[3.9rem] w-12 flex items-center justify-center"
             >
               <button
                 className="border border-gray-400 p-1 rounded-full"
@@ -157,9 +79,9 @@ export default function Categories() {
 
         <div
           ref={imageSlider}
-          className="flex items-center justify-between pt-2 md:pt-4 overflow-x-scroll no-scrollbar whitespace-nowrap "
+          className="flex items-center justify-between gap-4 pt-2 md:pt-3 overflow-x-scroll no-scrollbar whitespace-nowrap "
         >
-          {dummy_categories.map((category) => {
+          {categories.map((category) => {
             const selected = params?.get("category") === category.label;
             return (
               <div
@@ -170,7 +92,7 @@ export default function Categories() {
               >
                 <CategoryBox
                   label={category.label}
-                  icon={category.icon}
+                  iconUrl={category.iconUrl}
                   selected={selected}
                 />
 
@@ -188,10 +110,10 @@ export default function Categories() {
         <AnimatePresence>
           {rightArrowVisible && (
             <motion.div
-              initial={{ opacity: 1, x: 20 }}
+              initial={{ opacity: 1, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              className="absolute z-10 bg-white h-[4.25rem] md:h-20 top-2 md:top-4 right-0 w-10 flex items-center justify-center"
+              exit={{ opacity: 0, x: 10 }}
+              className="absolute -right-2 z-10 bg-white h-[3.5rem] top-1 md:top-6  md:h-[3.9rem] w-12 flex items-center justify-center"
             >
               <button
                 className="border border-gray-400 p-1 rounded-full"
