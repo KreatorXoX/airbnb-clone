@@ -52,7 +52,11 @@ export default function UserAccount({ currentUser }: Props) {
         </div>
       </div>
       {isOpen && (
-        <div className="absolute rounded-xl min-w-[15rem] max-w-[30vw] shadow-md bg-white overflow-hidden right-0 top-14 text-sm md:text-base">
+        <div
+          className="absolute rounded-xl min-w-[15rem] max-w-[30vw] shadow-md bg-white overflow-hidden right-0 top-14 text-sm md:text-base
+        z-10
+        "
+        >
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
