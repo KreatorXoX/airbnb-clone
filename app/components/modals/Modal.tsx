@@ -2,8 +2,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import Button from "../Button";
-import { AnimatePresence, motion } from "framer-motion";
-import { createPortal } from "react-dom";
+import { motion } from "framer-motion";
+import { useRouter, usePathname } from "next/navigation";
+
 type Props = {
   onClose: () => void;
   onSubmit: () => void;
@@ -29,6 +30,9 @@ export default function Modal({
   label,
   secondaryLabel,
 }: Props) {
+  const router = useRouter();
+  const path = usePathname();
+
   const [showModal, setShowModal] = useState(isOpen || false);
 
   useEffect(() => {
@@ -39,9 +43,11 @@ export default function Modal({
     if (disabled) {
       return;
     }
+    if (path?.includes("auth")) router.push("/");
+
     setShowModal(false);
     onClose();
-  }, [disabled, onClose]);
+  }, [disabled, onClose, path, router]);
 
   const handleSubmit = useCallback(() => {
     if (disabled) {

@@ -1,0 +1,31 @@
+"use client";
+import React from "react";
+import CategoryIcon from "../CategoryIcon";
+
+type Props = {
+  label: string;
+  iconUrl: string;
+  selected?: boolean;
+  onClick: (value: string) => void;
+};
+
+export default function CategoryInput({
+  iconUrl,
+  label,
+  selected,
+  onClick,
+}: Props) {
+  return (
+    <div
+      onClick={() => onClick(label)}
+      className={`${
+        selected ? "border-gray-800" : "border-gray-200"
+      }       rounded-xl border-2 hover:border-gray-800 outline-none transition cursor-pointer
+      flex flex-col justify-center items-center p-1
+      `}
+    >
+      <CategoryIcon label={label} iconUrl={iconUrl} selected={selected} />
+      <p className="font-semibold text-sm">{label}</p>
+    </div>
+  );
+}

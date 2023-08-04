@@ -9,6 +9,7 @@ import LoginModal from "./components/modals/LoginModal";
 import getCurrentUser from "./actions/getCurrentUser";
 import { font } from "./fonts";
 import SmallUserAccount from "./components/navbar/SmallUserAccount";
+import RentModal from "./components/modals/RentModal";
 
 export const metadata: Metadata = {
   title: "Airbnb Clone",
@@ -30,6 +31,7 @@ export default async function RootLayout({
         {children}
         <RegisterModal />
         <LoginModal />
+        <RentModal />
         <ToasterProvider />
         <div className="absolute bottom-0 w-full md:hidden">
           <SmallUserAccount />

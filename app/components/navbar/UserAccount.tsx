@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Image from "next/image";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiSolidUserCircle } from "react-icons/bi";
@@ -9,6 +9,8 @@ import { useOutsideClick } from "@/app/hooks/useOutsideClick";
 import { useLoginModal } from "@/app/hooks/useLogin";
 import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
+import { useRentalModal } from "@/app/hooks/useRent";
+import LoginModal from "../modals/LoginModal";
 
 type Props = {
   currentUser?: User | null;
@@ -18,13 +20,22 @@ export default function UserAccount({ currentUser }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const registerOpen = useRegisterModal((state) => state.onOpen);
   const loginOpen = useLoginModal((state) => state.onOpen);
+  const rentOpen = useRentalModal((state) => state.onOpen);
 
   const menuRef = useOutsideClick(() => setIsOpen(false));
+
+  const onRent = useCallback(() => {
+    // if (!currentUser) {
+    //   return loginOpen();
+    // }
+    rentOpen();
+  }, [rentOpen]);
 
   return (
     <div className="relative hidden md:inline-block" ref={menuRef}>
       <div className="flex items-center gap-3">
         <div
+          onClick={onRent}
           className="hidden md:block text-sm font-medium px-4 rounded-full
   transition hover:bg-yellow-200/10 cursor-pointer
   "
@@ -64,7 +75,7 @@ export default function UserAccount({ currentUser }: Props) {
                 <AccountItem onClick={() => {}} label="My favorites" />
                 <AccountItem onClick={() => {}} label="My reservations" />
                 <AccountItem onClick={() => {}} label="My properties" />
-                <AccountItem onClick={() => {}} label="Airbnb my home" />
+                <AccountItem onClick={onRent} label="Airbnb my home" />
                 <div className="w-full bg-gray-200 h-[1px] my-2"></div>
                 <AccountItem onClick={signOut} label="Logout" />
               </>
@@ -73,7 +84,7 @@ export default function UserAccount({ currentUser }: Props) {
                 <AccountItem onClick={registerOpen} label="Sign up" />
                 <AccountItem onClick={loginOpen} label="Log in" />
                 <div className="w-full bg-gray-200 h-[1px] my-2"></div>
-                <AccountItem onClick={() => {}} label="Airbnb your home" />
+                <AccountItem onClick={onRent} label="Airbnb your home" />
                 <AccountItem onClick={() => {}} label="Help" />
               </>
             )}
