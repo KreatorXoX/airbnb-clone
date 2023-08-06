@@ -40,7 +40,7 @@ export default function UserAccount({ currentUser }: Props) {
   transition hover:bg-yellow-200/10 cursor-pointer
   "
         >
-          <span className="whitespace-nowrap">Airbnb your home</span>
+          <span className="whitespace-nowrap font-bold">Airbnb your home</span>
         </div>
         <div
           onClick={() => setIsOpen((prev) => !prev)}

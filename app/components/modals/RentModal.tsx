@@ -7,10 +7,11 @@ import { useRentalModal } from "@/app/hooks/useRent";
 
 import Modal from "./Modal";
 import Heading from "../Heading";
-import Input from "../inputs/Input";
+import Map from "../Map";
 import { categories } from "@/utils/categories";
 import CategoryInput from "../inputs/CategoryInput";
 import CountrySelectInput from "../inputs/CountrySelectInput";
+import { Country } from "@/app/hooks/useCountries";
 
 // multiple steps for rental modal
 
@@ -77,7 +78,7 @@ export default function RentModal() {
   });
 
   const selectedCategory = watch("category");
-  const selectedLocation = watch("location");
+  const selectedLocation: Country = watch("location");
 
   const customSetValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -124,6 +125,7 @@ export default function RentModal() {
           }}
           value={selectedLocation}
         />
+        <Map givenLatLng={selectedLocation?.countryLatlng} />
       </div>
     );
   }

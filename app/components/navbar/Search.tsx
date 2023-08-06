@@ -5,10 +5,10 @@ export default function Search() {
   return (
     <div className="border w-full md:w-fit py-2 rounded-full shadow-md md:shadow-sm hover:shadow-md cursor-pointer">
       <div className="flex ml-10 md:ml-5 items-start text-xs md:items-center md:justify-between flex-col md:flex-row">
-        <div className="truncate md:text-sm font-medium px-5 ">Anywhere</div>
+        <div className="truncate font-bold md:text-sm px-5 ">Anywhere</div>
         <div className="flex items-center justify-start">
           <div
-            className="truncate relative group/item  text-gray-600 md:text-gray-800 md:text-sm md:font-medium px-5 md:px-6 md:border-x flex-1 
+            className="truncate md:font-bold relative group/item  text-gray-600 md:text-gray-800 md:text-sm px-5 md:px-6 md:border-x flex-1 
           md:text-center text-left"
           >
             Any Week

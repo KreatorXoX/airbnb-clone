@@ -9,11 +9,15 @@ type Props = {
 export default function CategoryIcon({ selected, iconUrl, label }: Props) {
   return (
     <div
-      className={`${
-        selected ? "brightness-100" : "brightness-200"
-      } h-[32px] relative w-[32px] brightness-200 group-hover:brightness-100 transition`}
+      className={`h-[32px] relative w-[32px] brightness-200 group-hover:brightness-100 transition`}
     >
-      <Image src={iconUrl} fill alt={`${label}`} priority />
+      <Image
+        src={iconUrl}
+        fill
+        alt={`${label}`}
+        priority
+        className={`${selected ? " brightness-0" : "brightness-150"}`}
+      />
     </div>
   );
 }

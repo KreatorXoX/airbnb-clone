@@ -55,10 +55,10 @@ export default function Categories() {
   };
   return (
     <ClientContainer>
-      <div className="relative flex items-center md:py-4">
+      <div className="relative flex items-center md:pb-6 md:pt-4">
         <div
           ref={imageSlider}
-          className="flex items-center justify-between gap-4 pt-2 md:pt-3 overflow-x-scroll no-scrollbar whitespace-nowrap "
+          className="flex items-center justify-between gap-4 md:gap-10 pt-2 md:pt-3 overflow-x-scroll no-scrollbar whitespace-nowrap "
         >
           {categories.map((category) => {
             const selected = params?.get("category") === category.label;
@@ -78,7 +78,7 @@ export default function Categories() {
                 {selected && (
                   <motion.span
                     layoutId="bgNavigation"
-                    className="absolute inset-0 -z-10 border-green-600 border-b-2"
+                    className="absolute inset-0 top-1 -z-10 border-green-600 border-b-2"
                     transition={{ type: "spring", bounce: 0.2, duration: 1 }}
                   ></motion.span>
                 )}
@@ -96,7 +96,7 @@ export default function Categories() {
               className="absolute -left-2 z-5 h-[3.5rem] bg-white top-1 md:top-6  md:h-[3.9rem] w-12 flex items-center justify-center"
             >
               <button
-                className="border border-gray-400 p-1 rounded-full"
+                className="border border-gray-400 p-1 rounded-full focus:outline-none"
                 onClick={() =>
                   handleHorizantalScroll(imageSlider.current, 20, 120, -5)
                 }
@@ -120,7 +120,7 @@ export default function Categories() {
               className="absolute -right-2 z-5 bg-white h-[3.5rem] top-1 md:top-6  md:h-[3.9rem] w-12 flex items-center justify-center"
             >
               <button
-                className="border border-gray-400 p-1 rounded-full"
+                className="border border-gray-400 p-1 rounded-full focus:outline-none"
                 onClick={() =>
                   handleHorizantalScroll(imageSlider.current, 20, 120, 5)
                 }

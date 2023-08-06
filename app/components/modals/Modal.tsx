@@ -72,7 +72,7 @@ export default function Modal({
   return (
     <div
       onClick={handleClose}
-      className="justify-center items-center flex overflow-hidden inset-0 fixed z-50 outline-none focus:outline-none bg-neutral-500/70"
+      className="justify-center items-center flex overflow-y-auto md:overflow-hidden inset-0 fixed z-50 outline-none focus:outline-none bg-white md:bg-neutral-500/70"
     >
       <motion.div
         key={label}
@@ -81,13 +81,15 @@ export default function Modal({
         exit={{ y: 200, opacity: 0 }}
         transition={{ duration: 0.25 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 mx-auto h-full lg:h-auto md:h-auto"
+        className="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/5 mx-auto h-full lg:h-auto md:h-auto
+        overflow-y-auto md:overflow-hidden
+        "
       >
         {/* content */}
-        <div className="h-full">
-          <div className="h-full lg:h-auto md:h-auto border-0 md:rounded-lg shadow-md relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <div className="h-full overflow-y-auto md:overflow-hidden">
+          <div className="h-full overflow-y-auto md:overflow-hidden lg:h-auto md:h-auto border-0 md:rounded-lg shadow-md relative flex flex-col w-full bg-white outline-none focus:outline-none">
             {/* Header */}
-            <div className="flex items-center justify-center p-6 rounded-t relative border-b">
+            <div className="flex items-center justify-center pt-4 md:p-6 rounded-t relative border-b">
               <button
                 onClick={handleClose}
                 className="p-1 border-0 hover:opacity-70 transition absolute left-9"

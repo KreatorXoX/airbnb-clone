@@ -36,8 +36,12 @@ export default function CategoryBox({ iconUrl, label, selected }: Props) {
     <div
       onClick={handleClick}
       className={`
-      ${selected ? "" : " hover:border-b-2 hover:border-b-neutral-500 "}
-    flex flex-col items-center pb-1 px-1 justify-center group border-b-2 border-transparent hover:text-neutral-800 transition cursor-pointer
+      ${
+        selected
+          ? "text-black"
+          : " hover:border-b-2 hover:border-b-neutral-500 "
+      }
+    flex flex-col items-center pb-1 px-1 justify-center group border-b-2 border-transparent hover:text-neutral-900 transition cursor-pointer
      
     `}
     >
