@@ -12,6 +12,7 @@ import { categories } from "@/utils/categories";
 import CategoryInput from "../inputs/CategoryInput";
 import CountrySelectInput from "../inputs/CountrySelectInput";
 import { Country } from "@/app/hooks/useCountries";
+import BasicInfoInput from "../inputs/BasicInfoInput";
 
 // multiple steps for rental modal
 
@@ -79,6 +80,9 @@ export default function RentModal() {
 
   const selectedCategory = watch("category");
   const selectedLocation: Country = watch("location");
+  const selectedGuestCount = watch("guestCount");
+  const selectedRoomCount = watch("roomCount");
+  const selectedBathroomCount = watch("bathroomCount");
 
   const customSetValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -125,7 +129,44 @@ export default function RentModal() {
           }}
           value={selectedLocation}
         />
-        <Map givenLatLng={selectedLocation?.countryLatlng} />
+        <Map
+          onChangingLocation={(value) => {
+            customSetValue("location.countryLatLng", value);
+          }}
+          givenLatLng={selectedLocation?.countryLatLng}
+        />
+      </div>
+    );
+  }
+  if (step === STEPS.INFO) {
+    bodyContent = (
+      <div className="flex flex-col gap-10">
+        <Heading
+          title="Share some basics about your place"
+          subtitle="You will add more details later."
+        />
+        <div>
+          <BasicInfoInput
+            title="Guests"
+            subtitle="How many guest is allowed?"
+            value={selectedGuestCount}
+            onChange={(value) => customSetValue("guestCount", value)}
+          />
+          <BasicInfoInput
+            title="Rooms"
+            subtitle="How many rooms do you have?"
+            value={selectedRoomCount}
+            onChange={(value) => customSetValue("roomCount", value)}
+            canBeZero
+          />
+
+          <BasicInfoInput
+            title="Bathrooms"
+            subtitle="How many bathrooms do you have?"
+            value={selectedBathroomCount}
+            onChange={(value) => customSetValue("bathroomCount", value)}
+          />
+        </div>
       </div>
     );
   }

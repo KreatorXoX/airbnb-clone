@@ -1,157 +1,184 @@
 export const categories = [
   {
+    id: "1",
     label: "Apartment",
     iconUrl: "/images/Apartment.svg",
-    desciption: "This property has a modern design",
+    description:
+      "This apartment features a modern design and comfortable amenities.",
   },
   {
+    id: "2",
     label: "Barn",
     iconUrl: "/images/Barn.svg",
-    desciption: "This property is close to the beach",
+    description:
+      "Escape to this charming barn near the beach and enjoy a rustic getaway.",
   },
   {
-    label: "BBQ",
-    iconUrl: "/images/BBQ.svg",
-    desciption: "This property has windmills",
-  },
-  {
+    id: "3",
     label: "Cabin",
     iconUrl: "/images/Cabin.svg",
-    desciption: "This property has a modern design",
+    description:
+      "Experience cozy living in this cabin with modern design elements.",
   },
   {
+    id: "4",
     label: "Castle",
     iconUrl: "/images/Castle.svg",
-    desciption: "This property is close to the beach",
+    description:
+      "Indulge in luxury and history by staying in this majestic castle by the beach.",
   },
   {
+    id: "5",
     label: "House",
     iconUrl: "/images/House.svg",
-    desciption: "This property has windmills",
+    description:
+      "Stay in this unique house with windmills and enjoy a tranquil atmosphere.",
   },
   {
-    label: "Bed'n'fast",
-    iconUrl: "/images/Bed_breakfast.svg",
-    desciption: "This property has a modern design",
-  },
-  {
+    id: "6",
     label: "Van",
     iconUrl: "/images/Campervan.svg",
-    desciption: "This property is close to the beach",
+    description:
+      "Travel and stay close to the beach in this comfortable and mobile van.",
   },
   {
+    id: "7",
     label: "Casa",
     iconUrl: "/images/Casa.svg",
-    desciption: "This property has windmills",
+    description:
+      "Embrace a unique living experience in this casa with its own windmills.",
   },
   {
+    id: "8",
     label: "Cave",
     iconUrl: "/images/Cave.svg",
-    desciption: "This property has a modern design",
+    description:
+      "Discover modern comfort in this cave dwelling with all the amenities you need.",
   },
-
   {
+    id: "9",
     label: "Container",
     iconUrl: "/images/Container.svg",
-    desciption: "This property is close to the beach",
+    description:
+      "Stay in a converted container home near the beach and enjoy a one-of-a-kind retreat.",
   },
   {
+    id: "10",
     label: "Cycladic",
     iconUrl: "/images/Cycladic.svg",
-    desciption: "This property has windmills",
+    description:
+      "Immerse yourself in Cycladic architecture and enjoy the charm of windmills.",
   },
   {
+    id: "11",
     label: "Dammuso",
     iconUrl: "/images/Dammuso.svg",
-    desciption: "This property has a modern design",
+    description:
+      "Experience comfort and elegance in this dammuso property with modern design.",
   },
-
   {
+    id: "12",
     label: "Dome",
     iconUrl: "/images/Dome.svg",
-    desciption: "This property is close to the beach",
+    description:
+      "Stay in a unique dome-shaped accommodation near the beach and unwind.",
   },
   {
+    id: "13",
     label: "Farm",
     iconUrl: "/images/Farm.svg",
-    desciption: "This property has windmills",
+    description:
+      "Experience farm life and the beauty of windmills in this countryside retreat.",
   },
   {
-    label: "Fireplace",
-    iconUrl: "/images/Fireplace.svg",
-    desciption: "This property has a modern design",
-  },
-  {
+    id: "14",
     label: "Houseboat",
     iconUrl: "/images/Houseboat.svg",
-    desciption: "This property has a modern design",
+    description:
+      "Enjoy a serene stay on a houseboat with modern amenities and beach proximity.",
   },
-
   {
+    id: "15",
     label: "Kezhan",
     iconUrl: "/images/Kezhan.svg",
-    desciption: "This property is close to the beach",
+    description:
+      "Experience the cultural charm of a kezhan property located near the beach.",
   },
   {
+    id: "16",
     label: "Minsu",
     iconUrl: "/images/Minsu.svg",
-    desciption: "This property has windmills",
+    description:
+      "Stay in a minsu accommodation and enjoy the beauty of surrounding windmills.",
   },
   {
+    id: "17",
     label: "Patio",
     iconUrl: "/images/Patio.svg",
-    desciption: "This property has a modern design",
+    description:
+      "Relax on the patio of this modern property and enjoy its close proximity to the beach.",
   },
   {
-    label: "Pool",
-    iconUrl: "/images/Pool.svg",
-    desciption: "This property has a modern design",
-  },
-  {
+    id: "18",
     label: "Ryokan",
     iconUrl: "/images/Ryokan.svg",
-    desciption: "This property is close to the beach",
+    description:
+      "Experience traditional Japanese hospitality in a ryokan near the beach.",
   },
   {
+    id: "19",
     label: "Ski",
     iconUrl: "/images/Ski.svg",
-    desciption: "This property has windmills",
+    description:
+      "Stay in this ski-themed accommodation and enjoy the beauty of windmills.",
   },
   {
-    label: "Shepherd's hut",
+    id: "20",
+    label: "Shepherd's Hut",
     iconUrl: "/images/hut.svg",
-    desciption: "This property has a modern design",
+    description:
+      "Experience cozy living in a shepherd's hut with modern amenities and beach views.",
   },
   {
+    id: "21",
     label: "Tent",
     iconUrl: "/images/Tent.svg",
-    desciption: "This property has windmills",
+    description:
+      "Camp in style in a comfortable tent accommodation surrounded by windmills.",
   },
-
   {
+    id: "22",
     label: "Tiny home",
     iconUrl: "/images/Tinyhome.svg",
-    desciption: "This property has a modern design",
+    description:
+      "Experience the charm of tiny living in a modern home with beach access.",
   },
   {
+    id: "23",
     label: "Trullo",
     iconUrl: "/images/Trullo.svg",
-    desciption: "This property has windmills",
+    description:
+      "Stay in a trullo property and enjoy the allure of windmills in the vicinity.",
   },
   {
+    id: "24",
     label: "Tree house",
     iconUrl: "/images/Treehouse.svg",
-    desciption: "This property has a modern design",
+    description:
+      "Elevate your stay by lodging in a tree house with modern comforts and ocean views.",
   },
   {
+    id: "25",
     label: "Yurt",
     iconUrl: "/images/Yurt.svg",
-    desciption: "This property has windmills",
+    description:
+      "Experience the unique appeal of yurt living surrounded by the beauty of windmills.",
   },
-
   {
+    id: "26",
     label: "Windmill",
     iconUrl: "/images/Windmill.svg",
-    desciption: "This property has windmills",
+    description:
+      "Stay in a traditional windmill property and embrace the charm of this iconic feature.",
   },
 ];

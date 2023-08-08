@@ -61,15 +61,16 @@ export default function Categories() {
           className="flex items-center justify-between gap-4 md:gap-10 pt-2 md:pt-3 overflow-x-scroll no-scrollbar whitespace-nowrap "
         >
           {categories.map((category) => {
-            const selected = params?.get("category") === category.label;
+            const selected = params?.get("category") === category.id;
             return (
               <div
-                key={category.label}
+                key={category.id}
                 className={`${
                   selected ? "text-neutral-800" : "text-neutral-500"
                 } relative`}
               >
                 <CategoryBox
+                  id={category.id}
                   label={category.label}
                   iconUrl={category.iconUrl}
                   selected={selected}

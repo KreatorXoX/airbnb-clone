@@ -4,11 +4,13 @@ import ReactMapGl, { ViewState, ViewStateChangeEvent } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 import { FaLocationDot, FaHouse } from "react-icons/fa6";
+import { FieldValues, UseFormSetValue } from "react-hook-form";
 
 type Props = {
+  onChangingLocation: (value: number[]) => void;
   givenLatLng: number[];
 };
-export default function Map({ givenLatLng }: Props) {
+export default function Map({ givenLatLng, onChangingLocation }: Props) {
   const [viewport, setViewport] = useState<Partial<ViewState>>({
     zoom: 6,
     bearing: 0,
@@ -21,21 +23,22 @@ export default function Map({ givenLatLng }: Props) {
     setViewport((prev) => {
       return {
         ...prev,
-        latitude: givenLatLng ? givenLatLng[0] : 51.4934,
-        longitude: givenLatLng ? givenLatLng[1] : 0.0098,
+        latitude: givenLatLng ? givenLatLng[0] : 44.50195139835563,
+        longitude: givenLatLng ? givenLatLng[1] : -88.06002177147126,
+        zoom: 15,
       };
     });
   }, [givenLatLng]);
 
   const onMapDrag = (evt: ViewStateChangeEvent) => {
     setViewport(evt.viewState);
+
     setIsMoving(true);
-    // hold the lat lng for percisely locate the home
   };
 
   return (
     <div className="w-full h-[40vh] md:h-[50vh] relative">
-      <span className="absolute italic top-0 left-0 z-10 bg-gray-800/70 py-1 px-2 rounded-lg text-white font-bold border-none outline-none">
+      <span className="absolute italic bottom-0 right-0 z-10 bg-gray-800/70 py-1 px-2 rounded-lg text-white font-bold border-none outline-none">
         Zoom in to your property&apos;s location
       </span>
       <ReactMapGl
@@ -47,14 +50,15 @@ export default function Map({ givenLatLng }: Props) {
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN!}
         mapStyle="mapbox://styles/gorkem-dev/cl96dwpib009m14l3qxut1j2j"
         onMove={(evt) => onMapDrag(evt)}
-        onMoveEnd={() => setIsMoving(false)}
+        onMoveEnd={(evt) => {
+          setIsMoving(false);
+          onChangingLocation([evt.viewState.latitude, evt.viewState.longitude]);
+        }}
       ></ReactMapGl>
       <div className="absolute left-[45%] top-[45%] z-10 flex flex-col">
         <div className="relative">
           <div
-            className={`absolute top-0 duration-300 ${
-              isMoving ? "-top-3" : ""
-            }`}
+            className={`absolute duration-300 ${isMoving ? "-top-3" : "top-0"}`}
           >
             <FaLocationDot
               enableBackground={1}

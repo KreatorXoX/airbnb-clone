@@ -4,7 +4,7 @@ export type Country = {
   value: string;
   label: string;
   countryFlag: string;
-  countryLatlng: number[];
+  countryLatLng: number[];
   countryRegion: string;
   countrySubregion: string;
 };
@@ -13,7 +13,7 @@ const formattedCountries: Country[] = countries.map((country) => {
     value: country.cca3,
     label: country.name.common,
     countryFlag: country.flag,
-    countryLatlng: country.latlng,
+    countryLatLng: country.latlng,
     countryRegion: country.region,
     countrySubregion: country.subregion,
   };

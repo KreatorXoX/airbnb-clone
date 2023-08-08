@@ -5,12 +5,13 @@ import Image from "next/image";
 import CategoryIcon from "../CategoryIcon";
 
 type Props = {
+  id: string;
   iconUrl: string;
   label: string;
   selected?: boolean;
 };
 
-export default function CategoryBox({ iconUrl, label, selected }: Props) {
+export default function CategoryBox({ id, iconUrl, label, selected }: Props) {
   const router = useRouter();
   const params = useSearchParams();
 
@@ -20,18 +21,18 @@ export default function CategoryBox({ iconUrl, label, selected }: Props) {
 
       const newQuery = {
         ...initialQuery,
-        category: label,
+        category: id,
       };
       const updatedQueryString = new URLSearchParams(newQuery);
 
-      if (params.get("category") === label) {
+      if (params.get("category") === id) {
         updatedQueryString.delete("category");
       }
 
       const url = `http://localhost:3000?${updatedQueryString}`;
       router.push(url);
     }
-  }, [params, label, router]);
+  }, [params, id, router]);
   return (
     <div
       onClick={handleClick}

@@ -47,7 +47,7 @@ export const authOptions: AuthOptions = {
         if (!isMatch) {
           throw new Error("Invalid credentials");
         }
-        console.log("not password error");
+
         return user;
       },
     }),
@@ -59,7 +59,11 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET as string,
 };
 
-export default NextAuth(authOptions);
+const authHandler = NextAuth(authOptions);
+export default async function handler(...params: any[]) {
+  await authHandler(...params);
+}
+// export default NextAuth(authOptions);
