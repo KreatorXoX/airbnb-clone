@@ -5,7 +5,7 @@ import React from "react";
 import Select from "react-select";
 
 type Props = {
-  value?: Country;
+  value: Country | null;
   onChange: (country: Country) => void;
 };
 export default function CountrySelectInput({ value, onChange }: Props) {

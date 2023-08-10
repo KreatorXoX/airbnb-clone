@@ -16,17 +16,63 @@ import BasicInfoInput from "../inputs/BasicInfoInput";
 import ImageUploader from "../inputs/ImageUploader";
 import { toast } from "react-hot-toast";
 import Input from "../inputs/Input";
+import { ListingPlace } from "@/types";
+import PlaceTypeInput from "../inputs/PlaceTypeInput";
 
 // multiple steps for rental modal
 
 enum STEPS {
   CATEGORY = 0,
-  LOCATION = 1,
-  INFO = 2,
-  IMAGES = 3,
-  DESCRIPTON = 4,
-  PRICE = 5,
+  TYPE = 1,
+  LOCATION = 2,
+  INFO = 3,
+  AMENITIES = 4,
+  IMAGES = 5,
+  DESCRIPTON = 6,
+  PRICE = 7,
 }
+
+type Join<K, P> = K extends string | number
+  ? P extends string | number
+    ? `${K}${"" extends P ? "" : "."}${P}`
+    : never
+  : never;
+
+type Prev = [
+  never,
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  ...0[]
+];
+
+type KeysOfListPlace<T, D extends number = 10> = [D] extends [never]
+  ? never
+  : T extends object
+  ? {
+      [K in keyof T]-?: K extends string | number
+        ? `${K}` | Join<K, KeysOfListPlace<T[K], Prev[D]>>
+        : never;
+    }[keyof T]
+  : "";
 
 export default function RentModal() {
   const [step, setStep] = useState(STEPS.CATEGORY);
@@ -67,14 +113,16 @@ export default function RentModal() {
     watch,
     reset,
     formState: { errors },
-  } = useForm<FieldValues>({
+  } = useForm<ListingPlace>({
     defaultValues: {
       category: "",
+      type: "entire",
       location: null,
       guestCount: 1,
       bedroomCount: 1,
       bedCount: 1,
       bathroomCount: 1,
+      amenities: null,
       imageSrc: "",
       price: 1,
       title: "",
@@ -83,14 +131,22 @@ export default function RentModal() {
   });
 
   const selectedCategory = watch("category");
-  const selectedLocation: Country = watch("location");
+  const selectedType = watch("type");
+  const selectedLocation = watch("location");
   const selectedGuestCount = watch("guestCount");
   const selectedBedroomCount = watch("bedroomCount");
   const selectedBedCount = watch("bedCount");
   const selectedBathroomCount = watch("bathroomCount");
+  const selectedAmenities = watch("amenities");
   const selectedImage = watch("imageSrc");
+  const selectedTitle = watch("title");
+  const selectedDescription = watch("description");
+  const selectedPrice = watch("price");
 
-  const customSetValue = (id: string, value: any) => {
+  const customSetValue = (
+    id: Partial<KeysOfListPlace<ListingPlace>>,
+    value: any
+  ) => {
     setValue(id, value, {
       shouldValidate: true,
       shouldDirty: true,
@@ -105,17 +161,15 @@ export default function RentModal() {
   let bodyContent = (
     <div className="flex flex-col gap-10">
       <Heading
-        title="Which of these best describe your place?"
+        title="Which of these best describes your place?"
         subtitle="Pick a category"
       />
-      <div className="grid grid-cols-3 md:grid-cols-2 gap-4 pb-2 max-h-[40vh] md:max-h-[50vh] overflow-y-auto">
+      <div className="grid grid-cols-3 md:grid-cols-2 gap-4 pb-2 max-h-[60vh] md:max-h-[50vh] overflow-y-auto no-scrollbar">
         {categories.map((category) => {
           return (
             <div key={category.label} className="col-span-1">
               <CategoryInput
-                onClick={(pointedCategory) =>
-                  customSetValue("category", pointedCategory)
-                }
+                onClick={(value) => customSetValue("category", value)}
                 selected={selectedCategory === category.label}
                 label={category.label}
                 iconUrl={category.iconUrl}
@@ -126,6 +180,38 @@ export default function RentModal() {
       </div>
     </div>
   );
+
+  if (step === STEPS.TYPE) {
+    bodyContent = (
+      <div className="flex flex-col gap-10">
+        <Heading title="What type of place will guests have?" subtitle="" />
+        <PlaceTypeInput
+          id="1"
+          title="An entire place"
+          subtitle="Guests have the whole place to themselves"
+          iconUrl={"/images/House.svg"}
+          onClick={(value) => customSetValue("type", value)}
+          selected
+        />
+        <PlaceTypeInput
+          id="2"
+          title="A room"
+          subtitle="Guests have their own room in a home, plus access to shared spaces."
+          iconUrl={"/images/Door.svg"}
+          onClick={(value) => customSetValue("type", value)}
+          selected
+        />
+        <PlaceTypeInput
+          id="3"
+          title="A Shared room"
+          subtitle="Guests sleep in a room or common area that may be shared with you or others"
+          iconUrl={"/images/House.svg"}
+          onClick={(value) => customSetValue("type", value)}
+          selected
+        />
+      </div>
+    );
+  }
   if (step === STEPS.LOCATION) {
     bodyContent = (
       <div className="flex flex-col gap-10">
@@ -188,6 +274,38 @@ export default function RentModal() {
           />
         </div>
       </div>
+    );
+  }
+  if (step === STEPS.AMENITIES) {
+    bodyContent = (
+      <div className="flex flex-col gap-10">
+        <Heading
+          title="Tell guests what your place has to offer"
+          subtitle="Select the ones applies to your place"
+        />
+      </div>
+      // <div className="flex flex-col gap-10">
+      //   <Heading
+      //     title="Tell guests what your place has to offer"
+      //     subtitle="Select the ones applies to your place"
+      //   />
+      //   <div className="grid grid-cols-3 md:grid-cols-2 gap-4 pb-2 max-h-[40vh] md:max-h-[50vh] overflow-y-auto ">
+      //     {amenities.map((amenity) => {
+      //       return (
+      //         <div key={amenity.label} className="col-span-1">
+      //           <AmenityInput
+      //             onClick={(value) =>
+      //               customSetValue("amenities", value)
+      //             }
+      //             selected={selectedAmenities?.find(amenity=>amenity.label) }
+      //             label={amenity.label}
+      //             iconUrl={amenity.iconUrl}
+      //           />
+      //         </div>
+      //       );
+      //     })}
+      //   </div>
+      // </div>
     );
   }
   if (step === STEPS.IMAGES) {
