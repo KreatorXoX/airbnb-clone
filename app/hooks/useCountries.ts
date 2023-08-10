@@ -7,6 +7,7 @@ export type Country = {
   countryLatLng: number[];
   countryRegion: string;
   countrySubregion: string;
+  zoom: number;
 };
 const formattedCountries: Country[] = countries.map((country) => {
   return {
@@ -16,6 +17,7 @@ const formattedCountries: Country[] = countries.map((country) => {
     countryLatLng: country.latlng,
     countryRegion: country.region,
     countrySubregion: country.subregion,
+    zoom: 6,
   };
 });
 

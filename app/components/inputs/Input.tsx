@@ -28,8 +28,8 @@ export default function Input({
     <div className="w-full relative">
       {formatPrice && (
         <BiDollar
-          size={24}
-          className="text-neutral-700 absolute top-5 left-2"
+          size={16}
+          className="text-neutral-700 absolute top-[29px] left-4"
         />
       )}
       <input
@@ -40,14 +40,14 @@ export default function Input({
         placeholder=" "
         className={`peer w-full p-4 pt-6 font-light bg-white border rounded-md outline-none transition
         disabled:opacity-70 disabled:cursor-not-allowed
-        ${formatPrice ? "pl-9" : "pl-4"}
+   ${formatPrice ? "pl-8" : "pl-4"}
         ${errors[id] ? "border-rose-500" : "border-neutral-300"}
         ${errors[id] ? "focus:border-rose-500" : "focus:border-black"}
         `}
       />
       <label
         htmlFor=""
-        className={`${formatPrice ? "left-9" : "left-4"}
+        className={`${formatPrice ? "left-8" : "left-4"}
         ${errors[id] ? "text-rose-500" : "text-neutral-500"}
       absolute text-base transform duration-150 -translate-y-3
       top-5 z-10 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4

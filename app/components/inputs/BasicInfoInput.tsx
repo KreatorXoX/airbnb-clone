@@ -29,7 +29,7 @@ export default function BasicInfoInput({
   const increaseHandler = useCallback(() => {
     onChange(value + 1);
   }, [value, onChange]);
-  console.log(value);
+
   return (
     <div
       className="border-b last:border-none py-8 flex items-center justify-between

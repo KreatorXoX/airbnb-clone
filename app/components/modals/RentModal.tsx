@@ -13,6 +13,9 @@ import CategoryInput from "../inputs/CategoryInput";
 import CountrySelectInput from "../inputs/CountrySelectInput";
 import { Country } from "@/app/hooks/useCountries";
 import BasicInfoInput from "../inputs/BasicInfoInput";
+import ImageUploader from "../inputs/ImageUploader";
+import { toast } from "react-hot-toast";
+import Input from "../inputs/Input";
 
 // multiple steps for rental modal
 
@@ -69,7 +72,8 @@ export default function RentModal() {
       category: "",
       location: null,
       guestCount: 1,
-      roomCount: 1,
+      bedroomCount: 1,
+      bedCount: 1,
       bathroomCount: 1,
       imageSrc: "",
       price: 1,
@@ -81,8 +85,10 @@ export default function RentModal() {
   const selectedCategory = watch("category");
   const selectedLocation: Country = watch("location");
   const selectedGuestCount = watch("guestCount");
-  const selectedRoomCount = watch("roomCount");
+  const selectedBedroomCount = watch("bedroomCount");
+  const selectedBedCount = watch("bedCount");
   const selectedBathroomCount = watch("bathroomCount");
+  const selectedImage = watch("imageSrc");
 
   const customSetValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -90,6 +96,10 @@ export default function RentModal() {
       shouldDirty: true,
       shouldTouch: true,
     });
+    if (id.includes("location") && !id.includes("zoom"))
+      toast.success(
+        `${id.split(".")[0].toString().toUpperCase()} is confirmed`
+      );
   };
 
   let bodyContent = (
@@ -129,12 +139,16 @@ export default function RentModal() {
           }}
           value={selectedLocation}
         />
-        <Map
-          onChangingLocation={(value) => {
-            customSetValue("location.countryLatLng", value);
-          }}
-          givenLatLng={selectedLocation?.countryLatLng}
-        />
+        {selectedLocation && (
+          <Map
+            onChangingLocation={(location: number[], zoom: number) => {
+              customSetValue("location.countryLatLng", location);
+              customSetValue("location.zoom", zoom);
+            }}
+            givenLatLng={selectedLocation?.countryLatLng}
+            givenZoom={selectedLocation?.zoom}
+          />
+        )}
       </div>
     );
   }
@@ -153,11 +167,17 @@ export default function RentModal() {
             onChange={(value) => customSetValue("guestCount", value)}
           />
           <BasicInfoInput
-            title="Rooms"
-            subtitle="How many rooms do you have?"
-            value={selectedRoomCount}
-            onChange={(value) => customSetValue("roomCount", value)}
+            title="Bedrooms"
+            subtitle="How many bedrooms do you have?"
+            value={selectedBedroomCount}
+            onChange={(value) => customSetValue("bedroomCount", value)}
             canBeZero
+          />
+          <BasicInfoInput
+            title="Beds"
+            subtitle="How many beds do you have?"
+            value={selectedBedCount}
+            onChange={(value) => customSetValue("bedCount", value)}
           />
 
           <BasicInfoInput
@@ -165,6 +185,70 @@ export default function RentModal() {
             subtitle="How many bathrooms do you have?"
             value={selectedBathroomCount}
             onChange={(value) => customSetValue("bathroomCount", value)}
+          />
+        </div>
+      </div>
+    );
+  }
+  if (step === STEPS.IMAGES) {
+    bodyContent = (
+      <div className="flex flex-col gap-10">
+        <Heading
+          title="Add some photos of your place"
+          subtitle="Show guests what you place looks like!"
+        />
+        <ImageUploader
+          value={selectedImage}
+          onChange={(value) => customSetValue("imageSrc", value)}
+        />
+      </div>
+    );
+  }
+  if (step === STEPS.DESCRIPTON) {
+    bodyContent = (
+      <div className="flex flex-col gap-10">
+        <Heading
+          title="How would you describe your place?"
+          subtitle="Short and sweet works best!"
+        />
+        <div className="flex flex-col gap-5 items-center justify-center">
+          <Input
+            id="title"
+            label="Title"
+            type="text"
+            errors={errors}
+            required
+            register={register}
+          />
+
+          <Input
+            id="description"
+            label="Description"
+            type="text"
+            errors={errors}
+            required
+            register={register}
+          />
+        </div>
+      </div>
+    );
+  }
+  if (step === STEPS.PRICE) {
+    bodyContent = (
+      <div className="flex flex-col gap-10">
+        <Heading
+          title="Now, set your price"
+          subtitle="How much do you charge per night?"
+        />
+        <div className="flex flex-col gap-5 items-center justify-center">
+          <Input
+            id="price"
+            label="Price"
+            type="text"
+            errors={errors}
+            required
+            register={register}
+            formatPrice
           />
         </div>
       </div>
