@@ -1,10 +1,9 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import ReactMapGl, { ViewState, ViewStateChangeEvent } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-
 import { FaLocationDot, FaHouse } from "react-icons/fa6";
-import { FieldValues, UseFormSetValue } from "react-hook-form";
 
 type Props = {
   onChangingLocation: (location: number[], zoom: number) => void;

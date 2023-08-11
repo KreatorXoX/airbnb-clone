@@ -1,27 +1,28 @@
 "use client";
-import React, { useCallback, useState } from "react";
 
-import Image from "next/image";
+import React from "react";
+import { IconType } from "react-icons";
+
 type Props = {
-  id: string;
-  onClick: (id: string) => void;
+  value: string;
+  onClick: (value: string) => void;
   title: string;
   subtitle: string;
   selected?: boolean;
-  iconUrl: string;
+  icon: IconType;
 };
 
 export default function PlaceTypeInput({
-  id,
+  value,
   title,
   subtitle,
   onClick,
   selected,
-  iconUrl,
+  icon: Icon,
 }: Props) {
   return (
     <div
-      onClick={() => onClick(id)}
+      onClick={() => onClick(value)}
       className={`${
         selected ? "border-gray-800" : "border-gray-200"
       }       rounded-xl border-2 hover:border-gray-800 outline-none transition cursor-pointer
@@ -32,8 +33,8 @@ export default function PlaceTypeInput({
         <p className="text-xl">{title}</p>
         <span className="text-sm w-full text-neutral-500 ">{subtitle}</span>
       </div>
-      <div>
-        <Image alt="amenity" src={iconUrl} width={50} height={50} />
+      <div className="pl-4">
+        <Icon size={35} />
       </div>
     </div>
   );

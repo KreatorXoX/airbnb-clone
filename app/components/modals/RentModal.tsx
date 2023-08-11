@@ -2,22 +2,27 @@
 import React, { useMemo, useState } from "react";
 import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
 import { AnimatePresence } from "framer-motion";
+import { AiOutlineHome } from "react-icons/ai";
+import { BsDoorOpen } from "react-icons/bs";
+import { LiaUserFriendsSolid } from "react-icons/lia";
+import { toast } from "react-hot-toast";
 
 import { useRentalModal } from "@/app/hooks/useRent";
+import { categories } from "@/utils/categories";
+import { amenities } from "@/utils/amenities";
+import { ListingPlace } from "@/types";
 
 import Modal from "./Modal";
 import Heading from "../Heading";
 import Map from "../Map";
-import { categories } from "@/utils/categories";
+
 import CategoryInput from "../inputs/CategoryInput";
 import CountrySelectInput from "../inputs/CountrySelectInput";
-import { Country } from "@/app/hooks/useCountries";
 import BasicInfoInput from "../inputs/BasicInfoInput";
 import ImageUploader from "../inputs/ImageUploader";
-import { toast } from "react-hot-toast";
 import Input from "../inputs/Input";
-import { ListingPlace } from "@/types";
 import PlaceTypeInput from "../inputs/PlaceTypeInput";
+import AmenityInput from "../inputs/AmenityInput";
 
 // multiple steps for rental modal
 
@@ -142,7 +147,7 @@ export default function RentModal() {
   const selectedTitle = watch("title");
   const selectedDescription = watch("description");
   const selectedPrice = watch("price");
-
+  console.log(selectedAmenities);
   const customSetValue = (
     id: Partial<KeysOfListPlace<ListingPlace>>,
     value: any
@@ -186,28 +191,28 @@ export default function RentModal() {
       <div className="flex flex-col gap-10">
         <Heading title="What type of place will guests have?" subtitle="" />
         <PlaceTypeInput
-          id="1"
+          value="entire"
           title="An entire place"
           subtitle="Guests have the whole place to themselves"
-          iconUrl={"/images/House.svg"}
+          icon={AiOutlineHome}
           onClick={(value) => customSetValue("type", value)}
-          selected
+          selected={selectedType === "entire"}
         />
         <PlaceTypeInput
-          id="2"
+          value="room"
           title="A room"
           subtitle="Guests have their own room in a home, plus access to shared spaces."
-          iconUrl={"/images/Door.svg"}
+          icon={BsDoorOpen}
           onClick={(value) => customSetValue("type", value)}
-          selected
+          selected={selectedType === "room"}
         />
         <PlaceTypeInput
-          id="3"
+          value="shared"
           title="A Shared room"
           subtitle="Guests sleep in a room or common area that may be shared with you or others"
-          iconUrl={"/images/House.svg"}
+          icon={LiaUserFriendsSolid}
           onClick={(value) => customSetValue("type", value)}
-          selected
+          selected={selectedType === "shared"}
         />
       </div>
     );
@@ -278,34 +283,35 @@ export default function RentModal() {
   }
   if (step === STEPS.AMENITIES) {
     bodyContent = (
-      <div className="flex flex-col gap-10">
-        <Heading
-          title="Tell guests what your place has to offer"
-          subtitle="Select the ones applies to your place"
-        />
-      </div>
       // <div className="flex flex-col gap-10">
       //   <Heading
       //     title="Tell guests what your place has to offer"
       //     subtitle="Select the ones applies to your place"
       //   />
-      //   <div className="grid grid-cols-3 md:grid-cols-2 gap-4 pb-2 max-h-[40vh] md:max-h-[50vh] overflow-y-auto ">
-      //     {amenities.map((amenity) => {
-      //       return (
-      //         <div key={amenity.label} className="col-span-1">
-      //           <AmenityInput
-      //             onClick={(value) =>
-      //               customSetValue("amenities", value)
-      //             }
-      //             selected={selectedAmenities?.find(amenity=>amenity.label) }
-      //             label={amenity.label}
-      //             iconUrl={amenity.iconUrl}
-      //           />
-      //         </div>
-      //       );
-      //     })}
-      //   </div>
       // </div>
+      <div className="flex flex-col gap-10">
+        <Heading
+          title="Tell guests what your place has to offer"
+          subtitle="Select the ones applies to your place"
+        />
+        <div className="grid grid-cols-3 md:grid-cols-2 gap-4 pb-2 max-h-[40vh] md:max-h-[50vh] overflow-y-auto ">
+          {amenities.map((amenity) => {
+            return (
+              <div key={amenity.label} className="col-span-1">
+                <AmenityInput
+                  onClick={(value) => customSetValue("amenities", value)}
+                  // selected={
+                  //   selectedAmenities
+                  // }
+                  label={amenity.label}
+                  id={amenity.id}
+                  iconUrl={amenity.iconUrl}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
     );
   }
   if (step === STEPS.IMAGES) {

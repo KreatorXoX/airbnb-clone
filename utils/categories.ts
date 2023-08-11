@@ -1,4 +1,11 @@
-export const categories = [
+export type Category = {
+  id: string;
+  label: string;
+  description: string;
+  iconUrl: string;
+};
+
+export const categories: Category[] = [
   {
     id: "1",
     label: "Apartment",
@@ -135,7 +142,7 @@ export const categories = [
   {
     id: "20",
     label: "Shepherd's Hut",
-    iconUrl: "/images/hut.svg",
+    iconUrl: "/images/Hut.svg",
     description:
       "Experience cozy living in a shepherd's hut with modern amenities and beach views.",
   },
