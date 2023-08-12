@@ -1,6 +1,11 @@
 "use client";
 import React, { useMemo, useState } from "react";
-import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
+import {
+  FieldValues,
+  useForm,
+  SubmitHandler,
+  Controller,
+} from "react-hook-form";
 import { AnimatePresence } from "framer-motion";
 import { AiOutlineHome } from "react-icons/ai";
 import { BsDoorOpen } from "react-icons/bs";
@@ -115,8 +120,10 @@ export default function RentModal() {
     register,
     handleSubmit,
     setValue,
+
     watch,
     reset,
+    control,
     formState: { errors },
   } = useForm<ListingPlace>({
     defaultValues: {
@@ -142,16 +149,23 @@ export default function RentModal() {
   const selectedBedroomCount = watch("bedroomCount");
   const selectedBedCount = watch("bedCount");
   const selectedBathroomCount = watch("bathroomCount");
-  const selectedAmenities = watch("amenities");
+  const selectedAmenities = watch("amenities")?.filter((value) => value);
   const selectedImage = watch("imageSrc");
   const selectedTitle = watch("title");
   const selectedDescription = watch("description");
   const selectedPrice = watch("price");
-  console.log(selectedAmenities);
+
   const customSetValue = (
     id: Partial<KeysOfListPlace<ListingPlace>>,
     value: any
   ) => {
+    if (id.includes("amenities") && selectedAmenities?.includes(value)) {
+      return setValue(id, undefined, {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      });
+    }
     setValue(id, value, {
       shouldValidate: true,
       shouldDirty: true,
@@ -283,26 +297,18 @@ export default function RentModal() {
   }
   if (step === STEPS.AMENITIES) {
     bodyContent = (
-      // <div className="flex flex-col gap-10">
-      //   <Heading
-      //     title="Tell guests what your place has to offer"
-      //     subtitle="Select the ones applies to your place"
-      //   />
-      // </div>
       <div className="flex flex-col gap-10">
         <Heading
           title="Tell guests what your place has to offer"
           subtitle="Select the ones applies to your place"
         />
-        <div className="grid grid-cols-3 md:grid-cols-2 gap-4 pb-2 max-h-[40vh] md:max-h-[50vh] overflow-y-auto ">
-          {amenities.map((amenity) => {
+        <div className="grid grid-cols-3 md:grid-cols-2 gap-4 pb-2 max-h-[40vh] md:max-h-[50vh] overflow-y-auto no-scrollbar ">
+          {amenities.map((amenity, idx) => {
             return (
               <div key={amenity.label} className="col-span-1">
                 <AmenityInput
-                  onClick={(value) => customSetValue("amenities", value)}
-                  // selected={
-                  //   selectedAmenities
-                  // }
+                  onClick={(value) => customSetValue(`amenities.${idx}`, value)}
+                  selected={selectedAmenities?.includes(amenity.id)}
                   label={amenity.label}
                   id={amenity.id}
                   iconUrl={amenity.iconUrl}

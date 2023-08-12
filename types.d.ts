@@ -8,7 +8,7 @@ type ListingPlace = {
   bedroomCount: number;
   bedCount: number;
   bathroomCount: number;
-  amenities: string[] | null;
+  amenities: string[] | null | undefined;
   imageSrc: string;
   price: number;
   title: string;

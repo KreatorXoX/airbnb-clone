@@ -9,6 +9,7 @@ import LoginModal from "./components/modals/LoginModal";
 import getCurrentUser from "./actions/getCurrentUser";
 import { font } from "./fonts";
 import SmallUserAccount from "./components/navbar/SmallUserAccount";
+
 import RentModal from "./components/modals/RentModal";
 
 export const metadata: Metadata = {

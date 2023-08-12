@@ -18,16 +18,24 @@ export default function AmenityInput({
   onClick,
 }: Props) {
   return (
-    <div
-      onClick={() => onClick(id)}
-      className={`${
-        selected ? "border-gray-800" : "border-gray-200"
-      }       rounded-xl border-2 hover:border-gray-800 outline-none transition cursor-pointer
-      flex flex-col justify-center p-1 pl-6
+    <>
+      <input
+        id={`amenity.${id}`}
+        type="checkbox"
+        onClick={() => onClick(id)}
+        hidden
+      />
+      <label
+        htmlFor={`amenity.${id}`}
+        className={`${
+          selected ? "border-gray-800" : "border-gray-200"
+        }       rounded-xl border-2 hover:border-gray-800 outline-none transition cursor-pointer
+      flex flex-col justify-center p-1 pl-6 focus:outline-none 
       `}
-    >
-      <CategoryIcon label={label} iconUrl={iconUrl} selected={selected} />
-      <p className="font-semibold text-sm">{label}</p>
-    </div>
+      >
+        <CategoryIcon label={label} iconUrl={iconUrl} selected={selected} />
+        <p className="font-semibold text-sm">{label}</p>
+      </label>
+    </>
   );
 }
