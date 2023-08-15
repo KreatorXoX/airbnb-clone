@@ -30,7 +30,7 @@ export default function AmenityInput({
         className={`${
           selected ? "border-gray-800" : "border-gray-200"
         }       rounded-xl border-2 hover:border-gray-800 outline-none transition cursor-pointer
-      flex flex-col justify-center p-1 pl-6 focus:outline-none 
+      flex flex-col justify-center p-1 pl-6 focus:outline-none  
       `}
       >
         <CategoryIcon label={label} iconUrl={iconUrl} selected={selected} />

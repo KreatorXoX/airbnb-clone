@@ -39,7 +39,7 @@ export default function ImageUploader({ onChange, value }: Props) {
                   <Image
                     alt="uploaded image"
                     fill
-                    sizes="100vw"
+                    sizes="33vw"
                     style={{ objectFit: "cover" }}
                     src={value}
                   />

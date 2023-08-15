@@ -37,7 +37,7 @@ export default function Input({
         id={id}
         disabled={disabled}
         type={type}
-        {...register(id, { required })}
+        {...register(id, { required, valueAsNumber: type === "number" })}
         placeholder=" "
         className={`peer w-full p-4 pt-6 font-light bg-white border rounded-md outline-none transition
         disabled:opacity-70 disabled:cursor-not-allowed

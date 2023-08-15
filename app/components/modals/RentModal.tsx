@@ -1,11 +1,7 @@
 "use client";
 import React, { useMemo, useState } from "react";
-import {
-  FieldValues,
-  useForm,
-  SubmitHandler,
-  Controller,
-} from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
 import { AnimatePresence } from "framer-motion";
 import { AiOutlineHome } from "react-icons/ai";
 import { BsDoorOpen } from "react-icons/bs";
@@ -28,6 +24,8 @@ import ImageUploader from "../inputs/ImageUploader";
 import Input from "../inputs/Input";
 import PlaceTypeInput from "../inputs/PlaceTypeInput";
 import AmenityInput from "../inputs/AmenityInput";
+import { CreateListingInput, createListingSchema } from "@/utils/listingSchema";
+import axios from "axios";
 
 // multiple steps for rental modal
 
@@ -87,13 +85,6 @@ type KeysOfListPlace<T, D extends number = 10> = [D] extends [never]
 export default function RentModal() {
   const [step, setStep] = useState(STEPS.CATEGORY);
 
-  const onBack = () => {
-    setStep((value) => value - 1);
-  };
-  const onNext = () => {
-    setStep((value) => value + 1);
-  };
-
   // if we at the last step label is Create meaning that
   //there will be no next step but to submit
   const label = useMemo(() => {
@@ -112,6 +103,20 @@ export default function RentModal() {
     return "Back";
   }, [step]);
 
+  const onSubmit: SubmitHandler<CreateListingInput> = (data) => {
+    // axios.post("/api/listings", {
+    //   category: data.category,
+    //   type: data.type,
+    //   location: data.location.countryLatLng,
+    //   guestCount: data.guestCount,
+    //   bedCount: data.bedCount,
+    //   bedroomCount: data.bedroomCount,
+    //   bathroomCount: data.bathroomCount,
+    //   amenities: data.amenities,
+    // });
+    // configure data that should hit the end point
+  };
+
   const rentOpen = useRentalModal((state) => state.onOpen);
   const rentClose = useRentalModal((state) => state.onClose);
   const isOpen = useRentalModal((state) => state.isOpen);
@@ -120,26 +125,28 @@ export default function RentModal() {
     register,
     handleSubmit,
     setValue,
-
+    getFieldState,
     watch,
     reset,
     control,
     formState: { errors },
-  } = useForm<ListingPlace>({
+  } = useForm<CreateListingInput>({
     defaultValues: {
       category: "",
       type: "entire",
-      location: null,
+      location: {},
       guestCount: 1,
       bedroomCount: 1,
       bedCount: 1,
       bathroomCount: 1,
-      amenities: null,
+      amenities: [],
       imageSrc: "",
       price: 1,
       title: "",
       description: "",
     },
+    resolver: zodResolver(createListingSchema),
+    mode: "all",
   });
 
   const selectedCategory = watch("category");
@@ -155,10 +162,30 @@ export default function RentModal() {
   const selectedDescription = watch("description");
   const selectedPrice = watch("price");
 
-  const customSetValue = (
-    id: Partial<KeysOfListPlace<ListingPlace>>,
-    value: any
-  ) => {
+  const onBack = () => {
+    setStep((value) => value - 1);
+  };
+  const onNext = () => {
+    if (step === 0 && !getFieldState("category").isTouched) {
+      return;
+    } else if (step === 2 && !getFieldState("location").isTouched) {
+      return;
+    } else if (step === 4 && !getFieldState("amenities").isTouched) {
+      return;
+    } else if (step === 5 && !getFieldState("imageSrc").isTouched) {
+      return;
+    } else if (
+      step === 6 &&
+      (!getFieldState("title").isTouched ||
+        !getFieldState("description").isTouched ||
+        errors.title ||
+        errors.description)
+    ) {
+      return;
+    } else setStep((value) => value + 1);
+  };
+
+  const customSetValue = (id: KeysOfListPlace<ListingPlace>, value: any) => {
     if (id.includes("amenities") && selectedAmenities?.includes(value)) {
       return setValue(id, undefined, {
         shouldValidate: true,
@@ -374,7 +401,7 @@ export default function RentModal() {
           <Input
             id="price"
             label="Price"
-            type="text"
+            type="number"
             errors={errors}
             required
             register={register}
@@ -396,7 +423,7 @@ export default function RentModal() {
           secondaryLabel={secondaryLabel}
           // no back button action on the first step
           secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
-          onSubmit={onNext}
+          onSubmit={step === STEPS.PRICE ? handleSubmit(onSubmit) : onNext}
           onClose={rentClose}
           body={bodyContent}
         />
