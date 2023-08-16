@@ -3,6 +3,7 @@ import React from "react";
 import CategoryIcon from "../CategoryIcon";
 
 type Props = {
+  id: string;
   label: string;
   iconUrl: string;
   selected?: boolean;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export default function CategoryInput({
+  id,
   iconUrl,
   label,
   selected,
@@ -17,7 +19,7 @@ export default function CategoryInput({
 }: Props) {
   return (
     <div
-      onClick={() => onClick(label)}
+      onClick={() => onClick(id)}
       className={`${
         selected ? "border-gray-800" : "border-gray-200"
       }       rounded-xl border-2 hover:border-gray-800 outline-none transition cursor-pointer

@@ -7,6 +7,8 @@ import { AiOutlineHome } from "react-icons/ai";
 import { BsDoorOpen } from "react-icons/bs";
 import { LiaUserFriendsSolid } from "react-icons/lia";
 import { toast } from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 import { useRentalModal } from "@/app/hooks/useRent";
 import { categories } from "@/utils/categories";
@@ -25,7 +27,6 @@ import Input from "../inputs/Input";
 import PlaceTypeInput from "../inputs/PlaceTypeInput";
 import AmenityInput from "../inputs/AmenityInput";
 import { CreateListingInput, createListingSchema } from "@/utils/listingSchema";
-import axios from "axios";
 
 // multiple steps for rental modal
 
@@ -83,6 +84,7 @@ type KeysOfListPlace<T, D extends number = 10> = [D] extends [never]
   : "";
 
 export default function RentModal() {
+  const router = useRouter();
   const [step, setStep] = useState(STEPS.CATEGORY);
 
   // if we at the last step label is Create meaning that
@@ -104,17 +106,20 @@ export default function RentModal() {
   }, [step]);
 
   const onSubmit: SubmitHandler<CreateListingInput> = (data) => {
-    // axios.post("/api/listings", {
-    //   category: data.category,
-    //   type: data.type,
-    //   location: data.location.countryLatLng,
-    //   guestCount: data.guestCount,
-    //   bedCount: data.bedCount,
-    //   bedroomCount: data.bedroomCount,
-    //   bathroomCount: data.bathroomCount,
-    //   amenities: data.amenities,
-    // });
-    // configure data that should hit the end point
+    axios
+      .post("/api/listings", data)
+      .then(() => {
+        toast.success("Listing Created");
+      })
+      .catch((err) => {
+        toast.error(err.response.statusText);
+      })
+      .finally(() => {
+        reset();
+        setStep(STEPS.CATEGORY);
+        rentClose();
+        router.refresh();
+      });
   };
 
   const rentOpen = useRentalModal((state) => state.onOpen);
@@ -134,7 +139,7 @@ export default function RentModal() {
     defaultValues: {
       category: "",
       type: "entire",
-      location: {},
+      location: undefined,
       guestCount: 1,
       bedroomCount: 1,
       bedCount: 1,
@@ -215,8 +220,9 @@ export default function RentModal() {
           return (
             <div key={category.label} className="col-span-1">
               <CategoryInput
+                id={category.id}
                 onClick={(value) => customSetValue("category", value)}
-                selected={selectedCategory === category.label}
+                selected={selectedCategory === category.id}
                 label={category.label}
                 iconUrl={category.iconUrl}
               />

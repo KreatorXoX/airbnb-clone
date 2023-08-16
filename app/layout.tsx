@@ -11,6 +11,7 @@ import { font } from "./fonts";
 import SmallUserAccount from "./components/navbar/SmallUserAccount";
 
 import RentModal from "./components/modals/RentModal";
+import getListings from "./actions/getListings";
 
 export const metadata: Metadata = {
   title: "Airbnb Clone",
@@ -24,6 +25,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const currentUser = await getCurrentUser();
+  const listings = await getListings();
+  console.log(listings);
 
   return (
     <html lang="en">

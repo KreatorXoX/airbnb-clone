@@ -44,7 +44,10 @@ export default function Map({
 
   return (
     <div className="w-full h-[40vh] md:h-[50vh] relative">
-      <span className="text-sm absolute italic bottom-0 right-0 z-10 bg-gray-800/70 py-1 px-2 rounded-lg text-white font-bold border-none outline-none">
+      <span
+        className="text-sm absolute italic left-0 top-0 z-10 bg-gray-800/70 py-1 px-2 rounded-lg text-white font-bold border-none outline-none
+      "
+      >
         Zoom in to your property&apos;s location
       </span>
       <button
