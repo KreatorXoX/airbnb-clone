@@ -19,9 +19,14 @@ export const createListingSchema = z.object({
   bedCount: z.number().min(1),
   bathroomCount: z.number().min(1),
   amenities: z.array(z.string().optional()),
-  imageSrc: z
-    .string({ required_error: "Image url is required" })
-    .nonempty("Image Url can not be an empty string"),
+  imageSrc: z.object({
+    url: z
+      .string({ required_error: "Image url is required" })
+      .nonempty("Image Url can not be an empty string"),
+    key: z
+      .string({ required_error: "Image key is required" })
+      .nonempty("Image Key can not be an empty string"),
+  }),
   title: z
     .string({ required_error: "Title is required" })
     .nonempty("Title can not be an empty string"),

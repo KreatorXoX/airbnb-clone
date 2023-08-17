@@ -145,7 +145,7 @@ export default function RentModal() {
       bedCount: 1,
       bathroomCount: 1,
       amenities: [],
-      imageSrc: "",
+      imageSrc: { url: "", key: "" },
       price: 1,
       title: "",
       description: "",
@@ -361,7 +361,7 @@ export default function RentModal() {
           subtitle="Show guests what you place looks like!"
         />
         <ImageUploader
-          value={selectedImage}
+          value={selectedImage.url}
           onChange={(value) => customSetValue("imageSrc", value)}
         />
       </div>

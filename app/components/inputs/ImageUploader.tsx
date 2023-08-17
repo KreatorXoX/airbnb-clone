@@ -1,18 +1,18 @@
 "use client";
 import React, { useCallback } from "react";
 import { TbPhotoPlus } from "react-icons/tb";
-import { CldUploadWidget, CldUploadWidgetResults } from "next-cloudinary";
+import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
 
 type Props = {
-  onChange: (value: string) => void;
+  onChange: (value: { url: string; key: string }) => void;
   value: string;
 };
 
 export default function ImageUploader({ onChange, value }: Props) {
   const handleUpload = useCallback(
     (result: any) => {
-      onChange(result.info.secure_url);
+      onChange({ url: result.info.secure_url, key: result.info.public_id });
     },
     [onChange]
   );

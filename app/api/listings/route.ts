@@ -1,28 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { v2 as cloudinary } from "cloudinary";
 
 import prisma from "@/app/lib/prismadb";
+import cloudinary from "@/app/lib/cloudinary";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-  secure: true,
-});
-
 export async function POST(req: NextRequest) {
-  const currentUser = await getCurrentUser();
-
-  if (!currentUser) {
-    // cloudinary.uploader.destroy()
-    // get public_id  to delete image right now we are only getting the secure_url
-    return new NextResponse("Unauthorized", {
-      status: 401,
-      statusText: "Login to create a new listing",
-    });
-  }
-
   const body = await req.json();
 
   const {
@@ -39,6 +21,18 @@ export async function POST(req: NextRequest) {
     title,
     description,
   } = body;
+
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    cloudinary.uploader.destroy(imageSrc.key);
+
+    return new NextResponse("Unauthorized", {
+      status: 401,
+      statusText: "Login to create a new listing",
+    });
+  }
+
   const data = {
     category,
     type,
@@ -55,15 +49,22 @@ export async function POST(req: NextRequest) {
     userId: currentUser.id,
   };
 
-  const listing = await prisma.listing.create({
-    data: data,
-  });
-
-  if (!listing)
-    return new NextResponse("Creating listing error", {
-      status: 500,
-      statusText: "Failed to create new listing in Prisma",
+  try {
+    const listing = await prisma.listing.create({
+      data: data,
     });
 
-  return NextResponse.json(listing);
+    if (!listing) {
+      cloudinary.uploader.destroy(imageSrc.key);
+      return new NextResponse("Creating listing error", {
+        status: 500,
+        statusText: "Failed to create new listing in Prisma",
+      });
+    }
+
+    return NextResponse.json(listing);
+  } catch (error) {
+    cloudinary.uploader.destroy(imageSrc.key);
+    console.log(error);
+  }
 }

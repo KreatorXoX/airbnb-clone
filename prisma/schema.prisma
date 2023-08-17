@@ -53,11 +53,16 @@ type Location {
   zoom             Int
 }
 
+type Image {
+  url String
+  key String
+}
+
 model Listing {
   id            String        @id @default(auto()) @map("_id") @db.ObjectId
   title         String
   description   String
-  imageSrc      String
+  imageSrc      Image
   createdAt     DateTime      @default(now())
   category      String
   bedroomCount  Int
