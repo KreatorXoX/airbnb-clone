@@ -35,13 +35,13 @@ export default function ImageUploader({ onChange, value }: Props) {
               <TbPhotoPlus size={40} />
               <span>Click to upload</span>
               {value && (
-                <div className="absolute inset-2 top-0 bg-white">
+                <div className="absolute inset-2 top-0 bg-white max-w-lg mx-auto">
                   <Image
                     alt="uploaded image"
                     fill
-                    sizes="33vw"
-                    style={{ objectFit: "cover" }}
+                    sizes="100vw"
                     src={value}
+                    className="rounded-lg object-fill"
                   />
                 </div>
               )}

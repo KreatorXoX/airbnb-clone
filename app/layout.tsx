@@ -11,7 +11,6 @@ import { font } from "./fonts";
 import SmallUserAccount from "./components/navbar/SmallUserAccount";
 
 import RentModal from "./components/modals/RentModal";
-import getListings from "./actions/getListings";
 
 export const metadata: Metadata = {
   title: "Airbnb Clone",
@@ -25,21 +24,19 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const currentUser = await getCurrentUser();
-  const listings = await getListings();
-  console.log(listings);
 
   return (
     <html lang="en">
       <body className={font.className}>
         <Navbar currentUser={currentUser} />
-        {children}
         <RegisterModal />
         <LoginModal />
         <RentModal />
         <ToasterProvider />
         <div className="absolute bottom-0 w-full md:hidden">
-          <SmallUserAccount />
+          <SmallUserAccount currentUser={currentUser} />
         </div>
+        <div className=" pt-[10rem]">{children}</div>
       </body>
     </html>
   );

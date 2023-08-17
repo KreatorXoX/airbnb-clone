@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
+import { signOut } from "next-auth/react";
 import {
   useScroll,
   useMotionValueEvent,
@@ -7,11 +9,21 @@ import {
   motion,
   useVelocity,
 } from "framer-motion";
-import { PiUserCircleLight, PiHeart, PiMagnifyingGlass } from "react-icons/pi";
+import {
+  PiUserCircleLight,
+  PiHeart,
+  PiMagnifyingGlass,
+  PiPower,
+} from "react-icons/pi";
+import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useLoginModal } from "@/app/hooks/useLogin";
 
-export default function SmallUserAccount() {
+type Props = {
+  currentUser?: User | null;
+};
+
+export default function SmallUserAccount({ currentUser }: Props) {
   const loginOpen = useLoginModal((state) => state.onOpen);
   const router = useRouter();
   const { scrollY } = useScroll();
@@ -50,13 +62,38 @@ export default function SmallUserAccount() {
             <PiHeart size={26} />
             <span className="text-gray-600">Whishlists</span>
           </button>
+
+          {/* Login modal will open if there is no current user
+          else it show navigate to user page
+           */}
           <button
             onClick={() => loginOpen()}
             className="flex flex-col items-center justify-center text-xs text-gray-400 gap-1 active:text-red-500"
           >
-            <PiUserCircleLight size={26} />
-            <span className="text-gray-600">Log in</span>
+            {currentUser?.image ? (
+              <Image
+                className="object-cover rounded-full"
+                width={26}
+                height={26}
+                src={`${currentUser.image}`}
+                alt={`${currentUser.name}`}
+              />
+            ) : (
+              <PiUserCircleLight size={26} />
+            )}
+            <span className="text-gray-600">
+              {currentUser ? currentUser.name : "Log in"}
+            </span>
           </button>
+          {currentUser && (
+            <button
+              onClick={() => signOut()}
+              className="flex flex-col items-center justify-center text-xs text-gray-400 gap-1 active:text-red-500"
+            >
+              <PiPower size={26} />
+              <span className="text-gray-600">Log out</span>
+            </button>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
