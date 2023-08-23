@@ -13,7 +13,7 @@ import { useRentalModal } from "@/app/hooks/useRent";
 import LoginModal from "../modals/LoginModal";
 
 type Props = {
-  currentUser?: User | null;
+  currentUser?: Partial<User> | null;
 };
 
 export default function UserAccount({ currentUser }: Props) {

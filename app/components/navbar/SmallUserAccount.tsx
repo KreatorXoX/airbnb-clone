@@ -20,7 +20,7 @@ import { useRouter } from "next/navigation";
 import { useLoginModal } from "@/app/hooks/useLogin";
 
 type Props = {
-  currentUser?: User | null;
+  currentUser?: Partial<User> | null;
 };
 
 export default function SmallUserAccount({ currentUser }: Props) {
@@ -48,7 +48,7 @@ export default function SmallUserAccount({ currentUser }: Props) {
           transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.8 }}
           className="w-full fixed bottom-0 border-t py-2
       flex justify-center items-center gap-20
-      bg-white
+      bg-white z-10
       "
         >
           <button
