@@ -11,8 +11,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { useRentalModal } from "@/app/hooks/useRent";
-import { categories } from "@/utils/categories";
-import { amenities } from "@/utils/amenities";
+import useCategories from "@/app/hooks/useCategories";
+import useAmenities from "@/app/hooks/useAmenities";
 import { ListingPlace } from "@/types";
 
 import Modal from "./Modal";
@@ -84,6 +84,8 @@ type KeysOfListPlace<T, D extends number = 10> = [D] extends [never]
   : "";
 
 export default function RentModal() {
+  const { getAmenities } = useAmenities();
+  const { getCategories } = useCategories();
   const router = useRouter();
   const [step, setStep] = useState(STEPS.CATEGORY);
 
@@ -216,7 +218,7 @@ export default function RentModal() {
         subtitle="Pick a category"
       />
       <div className="grid grid-cols-3 md:grid-cols-2 gap-4 pb-2 max-h-[60vh] md:max-h-[50vh] overflow-y-auto no-scrollbar">
-        {categories.map((category) => {
+        {getCategories().map((category) => {
           return (
             <div key={category.label} className="col-span-1">
               <CategoryInput
@@ -336,7 +338,7 @@ export default function RentModal() {
           subtitle="Select the ones applies to your place"
         />
         <div className="grid grid-cols-3 md:grid-cols-2 gap-4 pb-2 max-h-[40vh] md:max-h-[50vh] overflow-y-auto no-scrollbar ">
-          {amenities.map((amenity, idx) => {
+          {getAmenities().map((amenity, idx) => {
             return (
               <div key={amenity.label} className="col-span-1">
                 <AmenityInput

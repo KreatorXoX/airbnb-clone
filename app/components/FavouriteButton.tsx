@@ -1,16 +1,19 @@
 "use client";
-import { User } from "@prisma/client";
 import React from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import useFavourite from "@/app/hooks/useFavourite";
+import { IUser } from "@/types";
 
 type Props = {
   listingId: string;
-  currentUser: Partial<User> | null;
+  currentUser: IUser | null;
 };
 
 export default function FavouriteButton({ listingId, currentUser }: Props) {
-  const isFavourite = true;
-  const toggleFavourite = () => {};
+  const { isFavourite, toggleFavourite } = useFavourite({
+    listingId,
+    currentUser,
+  });
   return (
     <div
       onClick={toggleFavourite}

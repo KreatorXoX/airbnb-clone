@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth/next";
 
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import prisma from "@/app/lib/prismadb";
+import { IUser } from "@/types";
 
 export default async function getCurrentUser() {
   try {
@@ -27,7 +28,11 @@ export default async function getCurrentUser() {
       return null;
     }
 
-    return currentUser;
+    const user: IUser = {
+      ...currentUser,
+    };
+
+    return user;
   } catch (error) {
     return null;
   }

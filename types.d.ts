@@ -1,4 +1,15 @@
+import { Listing, Reservation } from "@prisma/client";
 import { Country } from "./app/hooks/useCountries";
+
+interface IUser {
+  id: string;
+  name: string | null;
+  email: string;
+  image: string | null;
+  favoriteListings: string[] | null;
+  listings: Listing[] | null;
+  reservations: Reservation[] | null;
+}
 
 type ListingPlace = {
   category: string;

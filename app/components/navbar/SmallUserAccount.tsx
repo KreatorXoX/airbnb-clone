@@ -15,12 +15,12 @@ import {
   PiMagnifyingGlass,
   PiPower,
 } from "react-icons/pi";
-import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useLoginModal } from "@/app/hooks/useLogin";
+import { IUser } from "@/types";
 
 type Props = {
-  currentUser?: Partial<User> | null;
+  currentUser?: IUser | null;
 };
 
 export default function SmallUserAccount({ currentUser }: Props) {
@@ -47,7 +47,7 @@ export default function SmallUserAccount({ currentUser }: Props) {
           exit={{ opacity: 0, y: 20 }}
           transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.8 }}
           className="w-full fixed bottom-0 border-t py-2
-      flex justify-center items-center gap-20
+      flex justify-center items-center gap-10 sm:gap-20 
       bg-white z-10
       "
         >

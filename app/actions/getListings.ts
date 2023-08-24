@@ -1,4 +1,5 @@
 import prisma from "@/app/lib/prismadb";
+import { Listing } from "@prisma/client";
 
 export default async function getListings() {
   try {
@@ -8,7 +9,7 @@ export default async function getListings() {
 
     if (!listings) return null;
 
-    return listings;
+    return listings as Listing[];
   } catch (error) {
     console.log(error);
   }

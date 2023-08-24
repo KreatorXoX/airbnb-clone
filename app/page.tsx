@@ -4,6 +4,7 @@ import ClientContainer from "./components/ClientContainer";
 import EmptyState from "./components/EmptyState";
 import ListingItem from "./components/listing/ListingItem";
 import getCurrentUser from "./actions/getCurrentUser";
+import { Listing } from "@prisma/client";
 
 export default async function Home() {
   const listings = await getListings();
@@ -13,8 +14,8 @@ export default async function Home() {
   return (
     // sm:grid-col-2
     <ClientContainer>
-      <div className="pt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-10">
-        {listings.map((listing: any) => {
+      <div className="pt-10 pb-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-10">
+        {listings.map((listing: Listing) => {
           return (
             <ListingItem
               key={listing.id}

@@ -1,7 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useCallback } from "react";
-import Image from "next/image";
 import CategoryIcon from "../CategoryIcon";
 
 type Props = {
@@ -46,13 +45,6 @@ export default function CategoryBox({ id, iconUrl, label, selected }: Props) {
      
     `}
     >
-      {/* <div
-        className={`${
-          selected ? "brightness-100" : "brightness-200"
-        } h-[32px] relative w-[32px] brightness-200 group-hover:brightness-100 transition`}
-      >
-        <Image src={iconUrl} fill alt={`${label}`} priority />
-      </div> */}
       <CategoryIcon iconUrl={iconUrl} label={label} selected={selected} />
       <div className="font-medium text-xs md:text-sm">{label}</div>
     </div>

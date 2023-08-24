@@ -11,9 +11,10 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
-import { categories } from "@/utils/categories";
+import useCategories from "@/app/hooks/useCategories";
 
 export default function Categories() {
+  const { getCategories } = useCategories();
   const params = useSearchParams();
   const [leftArrowVisible, setLeftArrowVisible] = useState(false);
   const [rightArrowVisible, setRightArrowVisible] = useState(true);
@@ -60,7 +61,7 @@ export default function Categories() {
           ref={imageSlider}
           className="flex items-center justify-between gap-4 md:gap-10 pt-2 md:pt-3 overflow-x-scroll no-scrollbar whitespace-nowrap "
         >
-          {categories.map((category) => {
+          {getCategories().map((category) => {
             const selected = params?.get("category") === category.id;
             return (
               <div

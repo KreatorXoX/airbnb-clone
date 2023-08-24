@@ -7,13 +7,13 @@ import AccountItem from "./AccountItem";
 import { useRegisterModal } from "@/app/hooks/useRegistration";
 import { useOutsideClick } from "@/app/hooks/useOutsideClick";
 import { useLoginModal } from "@/app/hooks/useLogin";
-import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
 import { useRentalModal } from "@/app/hooks/useRent";
 import LoginModal from "../modals/LoginModal";
+import { IUser } from "@/types";
 
 type Props = {
-  currentUser?: Partial<User> | null;
+  currentUser?: IUser | null;
 };
 
 export default function UserAccount({ currentUser }: Props) {
@@ -25,11 +25,11 @@ export default function UserAccount({ currentUser }: Props) {
   const menuRef = useOutsideClick(() => setIsOpen(false));
 
   const onRent = useCallback(() => {
-    // if (!currentUser) {
-    //   return loginOpen();
-    // }
+    if (!currentUser) {
+      return loginOpen();
+    }
     rentOpen();
-  }, [rentOpen]);
+  }, [rentOpen, currentUser, loginOpen]);
 
   return (
     <div className="relative hidden md:inline-block" ref={menuRef}>

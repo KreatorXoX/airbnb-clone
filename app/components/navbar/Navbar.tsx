@@ -1,13 +1,14 @@
 "use client";
-import { User } from "@prisma/client";
+
 import ClientContainer from "../ClientContainer";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserAccount from "./UserAccount";
 import Categories from "./Categories";
+import { IUser } from "@/types";
 
 type Props = {
-  currentUser?: Partial<User> | null;
+  currentUser?: IUser | null;
 };
 
 export default function Navbar({ currentUser }: Props) {
