@@ -7,9 +7,14 @@ import { IUser } from "@/types";
 type Props = {
   listingId: string;
   currentUser: IUser | null;
+  big?: boolean;
 };
 
-export default function FavouriteButton({ listingId, currentUser }: Props) {
+export default function FavouriteButton({
+  listingId,
+  currentUser,
+  big,
+}: Props) {
   const { isFavourite, toggleFavourite } = useFavourite({
     listingId,
     currentUser,
@@ -20,11 +25,11 @@ export default function FavouriteButton({ listingId, currentUser }: Props) {
       className="cursor-pointer relative hover:opacity-80 transition"
     >
       <AiOutlineHeart
-        size={28}
+        size={big ? 36 : 28}
         className="fill-white absolute -top-[2px] -right-[2px]"
       />
       <AiFillHeart
-        size={24}
+        size={big ? 32 : 24}
         className={`${isFavourite ? "fill-rose-500" : "fill-neutral-500/70"}`}
       />
     </div>
