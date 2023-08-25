@@ -38,8 +38,7 @@ export const categories: Category[] = [
     id: "5",
     label: "House",
     iconUrl: "/images/House.svg",
-    description:
-      "Stay in this unique house with windmills and enjoy a tranquil atmosphere.",
+    description: "Stay in this unique house and enjoy a tranquil atmosphere.",
   },
   {
     id: "6",

@@ -14,6 +14,7 @@ export default function CategoryIcon({ selected, iconUrl, label }: Props) {
       <Image
         src={iconUrl}
         fill
+        sizes="33vw"
         alt={`${label}`}
         priority
         className={`${selected ? " brightness-0" : "brightness-150"}`}

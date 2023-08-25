@@ -3,13 +3,13 @@ import { amenities } from "@/utils/amenities";
 const useAmenities = () => {
   const getAmenities = () => amenities;
 
-  const getAmenityById = (id: string) => {
-    return amenities.find((amenity) => amenity.id === id);
+  const getAmenitiesByIds = (ids: string[]) => {
+    return amenities.filter((amenity) => ids.includes(amenity.id));
   };
 
   return {
     getAmenities,
-    getAmenityById,
+    getAmenitiesByIds,
   };
 };
 
