@@ -8,16 +8,17 @@ type Props = {
 
 export default function ListingCategory({ category }: Props) {
   return (
-    <div className="flex flex-col gap-2 text-sm">
-      <div className="flex items-center gap-2">
-        <CategoryIcon
-          iconUrl={category?.iconUrl}
-          label={category.label}
-          selected
-        />
+    <div className="flex items-center gap-2 text-sm">
+      <CategoryIcon
+        iconUrl={category?.iconUrl}
+        label={category.label}
+        selected
+        big
+      />
+      <div className="flex flex-col gap-0 items-start">
         <h5 className="text-base">{category.label}</h5>
+        <span className="text-neutral-500">{category.description}</span>
       </div>
-      <span className="text-neutral-500">{category.description}</span>
     </div>
   );
 }

@@ -4,12 +4,25 @@ type Props = {
   iconUrl: string;
   selected?: boolean;
   label: string;
+  big?: boolean;
 };
 
-export default function CategoryIcon({ selected, iconUrl, label }: Props) {
+export default function CategoryIcon({ selected, iconUrl, label, big }: Props) {
+  let style;
+
+  switch (big) {
+    case true:
+      style = "h-[50px] w-[50px]";
+      break;
+    case undefined:
+      style = "h-[32px] w-[32px]";
+      break;
+    // ...other cases
+  }
+
   return (
     <div
-      className={`h-[32px] relative w-[32px] brightness-200 group-hover:brightness-100 transition`}
+      className={`${style} relative  brightness-200 group-hover:brightness-100 transition`}
     >
       <Image
         src={iconUrl}
