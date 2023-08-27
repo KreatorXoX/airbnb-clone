@@ -11,6 +11,18 @@ interface IUser {
   reservations: Reservation[] | null;
 }
 
+interface IReservation {
+  id: string;
+  userId: string;
+  listingId: string;
+  startDate: Date;
+  endDate: Date;
+  totalPrice: number;
+  createdAt: Date;
+  user: string;
+  listing: Listing;
+}
+
 type ListingPlace = {
   category: string;
   type: "entire" | "room" | "shared";
