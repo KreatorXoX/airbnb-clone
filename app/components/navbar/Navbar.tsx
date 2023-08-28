@@ -6,12 +6,15 @@ import Search from "./Search";
 import UserAccount from "./UserAccount";
 import Categories from "./Categories";
 import { IUser } from "@/types";
+import { usePathname } from "next/navigation";
 
 type Props = {
   currentUser?: IUser | null;
 };
 
 export default function Navbar({ currentUser }: Props) {
+  const pathname = usePathname();
+
   return (
     <nav className="fixed w-full bg-white pb-1 md:pb-0  shadow-sm md:shadow-none z-10">
       <div className=" py-4 border-transparent md:border-gray-200 md:border-b select-none">
@@ -23,7 +26,7 @@ export default function Navbar({ currentUser }: Props) {
           </div>
         </ClientContainer>
       </div>
-      <Categories />
+      {pathname === "/" && <Categories />}
     </nav>
   );
 }

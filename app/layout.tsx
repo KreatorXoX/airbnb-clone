@@ -36,7 +36,7 @@ export default async function RootLayout({
         <div className="absolute bottom-0 w-full md:hidden">
           <SmallUserAccount currentUser={currentUser} />
         </div>
-        <div className=" pt-[10rem]">{children}</div>
+        {children}
       </body>
     </html>
   );

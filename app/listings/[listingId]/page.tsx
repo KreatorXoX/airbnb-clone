@@ -4,7 +4,6 @@ import EmptyState from "@/app/components/EmptyState";
 import React from "react";
 import ListingClient from "./ListingClient";
 import getReservations from "@/app/actions/getReservations";
-import { Listing, Reservation } from "@prisma/client";
 
 type Props = {
   listingId?: string;
@@ -19,12 +18,10 @@ export default async function ListingPage({ params }: { params: Props }) {
     return <EmptyState />;
   }
   return (
-    <div className="pt-0 md:pt-10 pb-20">
-      <ListingClient
-        listing={listing}
-        currentUser={currentUser}
-        reservations={reservations}
-      />
-    </div>
+    <ListingClient
+      listing={listing}
+      currentUser={currentUser}
+      reservations={reservations}
+    />
   );
 }

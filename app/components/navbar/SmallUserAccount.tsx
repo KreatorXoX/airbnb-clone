@@ -81,7 +81,7 @@ export default function SmallUserAccount({ currentUser }: Props) {
             ) : (
               <PiUserCircleLight size={26} />
             )}
-            <span className="text-gray-600">
+            <span className="text-gray-600 first-letter:uppercase">
               {currentUser ? currentUser.name : "Log in"}
             </span>
           </button>

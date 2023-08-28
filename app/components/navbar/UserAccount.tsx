@@ -1,6 +1,7 @@
 "use client";
 import React, { useCallback, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiSolidUserCircle } from "react-icons/bi";
 import AccountItem from "./AccountItem";
@@ -9,7 +10,6 @@ import { useOutsideClick } from "@/app/hooks/useOutsideClick";
 import { useLoginModal } from "@/app/hooks/useLogin";
 import { signOut } from "next-auth/react";
 import { useRentalModal } from "@/app/hooks/useRent";
-import LoginModal from "../modals/LoginModal";
 import { IUser } from "@/types";
 
 type Props = {
@@ -17,6 +17,7 @@ type Props = {
 };
 
 export default function UserAccount({ currentUser }: Props) {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const registerOpen = useRegisterModal((state) => state.onOpen);
   const loginOpen = useLoginModal((state) => state.onOpen);
@@ -71,7 +72,13 @@ export default function UserAccount({ currentUser }: Props) {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-                <AccountItem onClick={() => {}} label="My trips" />
+                <AccountItem
+                  onClick={() => {
+                    setIsOpen(false);
+                    router.push("/trips");
+                  }}
+                  label="My trips"
+                />
                 <AccountItem onClick={() => {}} label="My favorites" />
                 <AccountItem onClick={() => {}} label="My reservations" />
                 <AccountItem onClick={() => {}} label="My properties" />

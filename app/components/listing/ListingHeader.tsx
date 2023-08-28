@@ -32,6 +32,7 @@ export default function ListingHeader({
           alt="Listing"
           src={imageUrl}
           fill
+          sizes="33vw"
           className=" object-cover w-full"
         />
         <div className="absolute top-5 right-5">

@@ -63,14 +63,14 @@ export default function ListingItem({
     const start = new Date(reservation.startDate);
     const end = new Date(reservation.endDate);
 
-    return `${start.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
+    return `${start.toLocaleDateString("en-US", {
       year: "numeric",
-    })} - ${end.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
+      month: "short",
+      day: "numeric",
+    })} - ${end.toLocaleDateString("en-US", {
       year: "numeric",
+      month: "short",
+      day: "numeric",
     })}`;
   }, [reservation]);
 

@@ -101,8 +101,8 @@ export default function ListingClient({
       .then(() => {
         toast.success("Success");
         setDateRange(initialDateRange);
-        // redirect to trips
         router.refresh();
+        router.push("/trips");
       })
       .catch(() => {
         toast.error("Something went wrong");
@@ -129,7 +129,7 @@ export default function ListingClient({
 
   return (
     <ClientContainer>
-      <div className="relative max-w-screen-lg mx-auto">
+      <div className="relative max-w-screen-lg mx-auto pb-10 md:pb-5 pt-[7rem]">
         <div className="flex flex-col gap-5">
           <ListingHeader
             id={listing.id}
@@ -156,7 +156,7 @@ export default function ListingClient({
               order-first
               pb-10
              md:order-last
-            md:max-h-96 cols-span-1 md:col-span-3 md:sticky md:top-[22%]"
+            md:max-h-96 cols-span-1 md:col-span-3 md:sticky md:top-[15%]"
             >
               <ListingReservation
                 price={listing.price}

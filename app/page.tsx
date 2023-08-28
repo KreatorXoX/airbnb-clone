@@ -12,9 +12,8 @@ export default async function Home() {
 
   if (!listings || listings?.length === 0) return <EmptyState showReset />;
   return (
-    // sm:grid-col-2
     <ClientContainer>
-      <div className="pt-10 pb-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-10">
+      <div className="pt-[10rem] md:pt-[12rem] pb-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-10">
         {listings.map((listing: Listing) => {
           return (
             <ListingItem

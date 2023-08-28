@@ -107,6 +107,7 @@ export default function ListingBody({
                   <Image
                     alt="amenity"
                     src={amenity.iconUrl}
+                    sizes="33vw"
                     fill
                     className=" object-cover"
                   />
