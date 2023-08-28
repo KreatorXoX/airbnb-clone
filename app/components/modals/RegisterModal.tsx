@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
@@ -19,7 +19,6 @@ import { signIn } from "next-auth/react";
 export default function RegisterModal() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isOpen = useRegisterModal((state) => state.isOpen);
-  const registerOpen = useRegisterModal((state) => state.onOpen);
   const loginOpen = useLoginModal((state) => state.onOpen);
   const registerClose = useRegisterModal((state) => state.onClose);
 
@@ -40,7 +39,9 @@ export default function RegisterModal() {
     axios
       .post("/api/register", data)
       .then(() => {
+        toast.success("Registration Completed");
         registerClose();
+        loginOpen();
       })
       .catch((err) => toast.error(err.message))
       .finally(() => setIsLoading(false));

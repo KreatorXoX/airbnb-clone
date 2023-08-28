@@ -79,9 +79,27 @@ export default function UserAccount({ currentUser }: Props) {
                   }}
                   label="My trips"
                 />
-                <AccountItem onClick={() => {}} label="My favorites" />
-                <AccountItem onClick={() => {}} label="My reservations" />
-                <AccountItem onClick={() => {}} label="My properties" />
+                <AccountItem
+                  onClick={() => {
+                    setIsOpen(false);
+                    router.push("/favourites");
+                  }}
+                  label="My favorites"
+                />
+                <AccountItem
+                  onClick={() => {
+                    setIsOpen(false);
+                    router.push("/reservations");
+                  }}
+                  label="My reservations"
+                />
+                <AccountItem
+                  onClick={() => {
+                    setIsOpen(false);
+                    router.push("/my-listings");
+                  }}
+                  label="My properties"
+                />
                 <AccountItem onClick={onRent} label="Airbnb my home" />
                 <div className="w-full bg-gray-200 h-[1px] my-2"></div>
                 <AccountItem onClick={signOut} label="Logout" />

@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
@@ -20,7 +19,6 @@ export default function LoginModal() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const isOpen = useLoginModal((state) => state.isOpen);
-  const loginOpen = useLoginModal((state) => state.onOpen);
   const loginClose = useLoginModal((state) => state.onClose);
 
   const registerOpen = useRegisterModal((state) => state.onOpen);
