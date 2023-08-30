@@ -1,13 +1,17 @@
 import { ListingPlace } from "@/types";
-import getListings from "./actions/getListings";
+import getListings, { ListingParams } from "./actions/getListings";
 import ClientContainer from "./components/ClientContainer";
 import EmptyState from "./components/EmptyState";
 import ListingItem from "./components/listing/ListingItem";
 import getCurrentUser from "./actions/getCurrentUser";
 import { Listing } from "@prisma/client";
 
-export default async function Home() {
-  const listings = await getListings();
+type SearchParams = {
+  searchParams: ListingParams;
+};
+
+export default async function Home({ searchParams }: SearchParams) {
+  const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
   if (!listings || listings?.length === 0) return <EmptyState showReset />;

@@ -6,7 +6,10 @@ export async function POST(req: Request) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return NextResponse.error();
+    return new NextResponse("Unauthorized", {
+      status: 401,
+      statusText: "Login to make reservations",
+    });
   }
 
   const body = await req.json();

@@ -11,7 +11,10 @@ export async function DELETE(req: Request, { params }: { params: Params }) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return NextResponse.error();
+    return new NextResponse("Unauthorized", {
+      status: 401,
+      statusText: "Login to cancel your reservation",
+    });
   }
 
   const { reservationId } = params;

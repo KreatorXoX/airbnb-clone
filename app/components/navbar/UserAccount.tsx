@@ -96,7 +96,7 @@ export default function UserAccount({ currentUser }: Props) {
                 <AccountItem
                   onClick={() => {
                     setIsOpen(false);
-                    router.push("/my-listings");
+                    router.push("/my-properties");
                   }}
                   label="My properties"
                 />

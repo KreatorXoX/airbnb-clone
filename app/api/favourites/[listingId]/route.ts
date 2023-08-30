@@ -11,7 +11,10 @@ export async function POST(req: Request, { params }: { params: Params }) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return NextResponse.error();
+    return new NextResponse("Unauthorized", {
+      status: 401,
+      statusText: "Login to add listing to your favourites",
+    });
   }
 
   const { listingId } = params;
@@ -40,7 +43,10 @@ export async function DELETE(req: Request, { params }: { params: Params }) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
-    return NextResponse.error();
+    return new NextResponse("Unauthorized", {
+      status: 401,
+      statusText: "Login to delete your favourites",
+    });
   }
 
   const { listingId } = params;

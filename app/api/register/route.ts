@@ -21,7 +21,10 @@ export async function POST(req: NextRequest) {
   });
 
   if (!user) {
-    throw new Error("Trouble when creating the user");
+    return new NextResponse("Creating user error", {
+      status: 500,
+      statusText: "Failed to create user in Prisma",
+    });
   }
 
   return NextResponse.json(user);

@@ -58,7 +58,12 @@ export default function SmallUserAccount({ currentUser }: Props) {
             <PiMagnifyingGlass size={26} />
             <span className="text-gray-600">Explore</span>
           </button>
-          <button className="flex flex-col items-center justify-center text-xs text-gray-400 gap-1 active:text-red-500">
+          <button
+            onClick={() => {
+              router.push("/favourites");
+            }}
+            className="flex flex-col items-center justify-center text-xs text-gray-400 gap-1 active:text-red-500"
+          >
             <PiHeart size={26} />
             <span className="text-gray-600">Whishlists</span>
           </button>
@@ -67,7 +72,13 @@ export default function SmallUserAccount({ currentUser }: Props) {
           else it show navigate to user page
            */}
           <button
-            onClick={() => loginOpen()}
+            onClick={() => {
+              if (!currentUser) {
+                loginOpen();
+              } else {
+                router.push("/trips");
+              }
+            }}
             className="flex flex-col items-center justify-center text-xs text-gray-400 gap-1 active:text-red-500"
           >
             {currentUser?.image ? (
