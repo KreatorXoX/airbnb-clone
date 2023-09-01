@@ -77,7 +77,12 @@ export default function SmallUserAccount({ currentUser }: Props) {
             }}
             className="flex flex-col items-center justify-center text-xs text-gray-400 gap-1 active:text-red-500"
           >
-            <PiHeart size={26} />
+            <Image
+              src="/images/miniLogo.svg"
+              alt="mini logo"
+              width={24}
+              height={20}
+            />
             <span className=" truncate text-gray-600">Trips</span>
           </button>
 

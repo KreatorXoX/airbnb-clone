@@ -100,7 +100,7 @@ export default function Categories() {
               <button
                 className="border border-gray-400 p-1 rounded-full focus:outline-none"
                 onClick={() =>
-                  handleHorizantalScroll(imageSlider.current, 20, 120, -5)
+                  handleHorizantalScroll(imageSlider.current, 35, 200, -25)
                 }
               >
                 <BiChevronLeft size={20} />
@@ -124,7 +124,7 @@ export default function Categories() {
               <button
                 className="border border-gray-400 p-1 rounded-full focus:outline-none"
                 onClick={() =>
-                  handleHorizantalScroll(imageSlider.current, 20, 120, 5)
+                  handleHorizantalScroll(imageSlider.current, 35, 200, 25)
                 }
               >
                 <BiChevronRight size={20} />

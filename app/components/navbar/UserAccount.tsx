@@ -100,7 +100,14 @@ export default function UserAccount({ currentUser }: Props) {
                   }}
                   label="My properties"
                 />
-                <AccountItem onClick={onRent} label="Airbnb my home" />
+                <div className="w-full bg-gray-200 h-[1px] my-2"></div>
+                <AccountItem
+                  onClick={() => {
+                    setIsOpen(false);
+                    router.push("/me");
+                  }}
+                  label="Account"
+                />
                 <div className="w-full bg-gray-200 h-[1px] my-2"></div>
                 <AccountItem
                   onClick={() =>
@@ -112,13 +119,13 @@ export default function UserAccount({ currentUser }: Props) {
                 />
               </>
             ) : (
-              <>
-                <AccountItem onClick={registerOpen} label="Sign up" />
+              <div className="font-light">
+                <AccountItem onClick={registerOpen} bold label="Sign up" />
                 <AccountItem onClick={loginOpen} label="Log in" />
                 <div className="w-full bg-gray-200 h-[1px] my-2"></div>
                 <AccountItem onClick={onRent} label="Airbnb your home" />
                 <AccountItem onClick={() => {}} label="Help" />
-              </>
+              </div>
             )}
           </div>
         </div>
