@@ -9,12 +9,7 @@ import {
   motion,
   useVelocity,
 } from "framer-motion";
-import {
-  PiUserCircleLight,
-  PiHeart,
-  PiMagnifyingGlass,
-  PiPower,
-} from "react-icons/pi";
+import { PiUserCircleLight, PiHeart, PiMagnifyingGlass } from "react-icons/pi";
 import { useRouter } from "next/navigation";
 import { useLoginModal } from "@/app/hooks/useLogin";
 import { IUser } from "@/types";
@@ -47,7 +42,7 @@ export default function SmallUserAccount({ currentUser }: Props) {
           exit={{ opacity: 0, y: 20 }}
           transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.8 }}
           className="w-full fixed bottom-0 border-t py-2
-      flex justify-center items-center gap-10 sm:gap-20 
+      flex justify-center items-center gap-[10%]
       bg-white z-10
       "
         >
@@ -56,27 +51,42 @@ export default function SmallUserAccount({ currentUser }: Props) {
             className="flex flex-col items-center justify-center text-xs text-gray-400 gap-1 active:text-red-500"
           >
             <PiMagnifyingGlass size={26} />
-            <span className="text-gray-600">Explore</span>
+            <span className=" truncate text-gray-600">Explore</span>
           </button>
           <button
             onClick={() => {
-              router.push("/favourites");
+              if (!currentUser) {
+                loginOpen();
+              } else {
+                router.push("/favourites");
+              }
             }}
             className="flex flex-col items-center justify-center text-xs text-gray-400 gap-1 active:text-red-500"
           >
             <PiHeart size={26} />
-            <span className="text-gray-600">Whishlists</span>
+            <span className=" truncate text-gray-600">Whishlists</span>
           </button>
 
-          {/* Login modal will open if there is no current user
-          else it show navigate to user page
-           */}
           <button
             onClick={() => {
               if (!currentUser) {
                 loginOpen();
               } else {
                 router.push("/trips");
+              }
+            }}
+            className="flex flex-col items-center justify-center text-xs text-gray-400 gap-1 active:text-red-500"
+          >
+            <PiHeart size={26} />
+            <span className=" truncate text-gray-600">Trips</span>
+          </button>
+
+          <button
+            onClick={() => {
+              if (!currentUser) {
+                loginOpen();
+              } else {
+                router.push("/me");
               }
             }}
             className="flex flex-col items-center justify-center text-xs text-gray-400 gap-1 active:text-red-500"
@@ -92,19 +102,19 @@ export default function SmallUserAccount({ currentUser }: Props) {
             ) : (
               <PiUserCircleLight size={26} />
             )}
-            <span className="text-gray-600 first-letter:uppercase">
+            <span className=" truncate text-gray-600 first-letter:uppercase">
               {currentUser ? currentUser.name : "Log in"}
             </span>
           </button>
-          {currentUser && (
+          {/* {currentUser && (
             <button
               onClick={() => signOut()}
               className="flex flex-col items-center justify-center text-xs text-gray-400 gap-1 active:text-red-500"
             >
               <PiPower size={26} />
-              <span className="text-gray-600">Log out</span>
+              <span className=" truncate text-gray-600">Log out</span>
             </button>
-          )}
+          )} */}
         </motion.div>
       )}
     </AnimatePresence>

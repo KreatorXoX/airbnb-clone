@@ -28,7 +28,7 @@ export default function CategoryBox({ id, iconUrl, label, selected }: Props) {
         updatedQueryString.delete("category");
       }
 
-      const url = `http://localhost:3000?${updatedQueryString}`;
+      const url = `${process.env.NEXT_PUBLIC_BASE_URL}?${updatedQueryString}`;
       router.push(url);
     }
   }, [params, id, router]);

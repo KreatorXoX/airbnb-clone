@@ -28,6 +28,7 @@ export default function Button({
   ${outline ? "bg-white" : "bg-rose-500"}
   ${outline ? "border-2 border-black hover:opacity-80" : "border-none"}
   ${outline ? "text-black" : "text-white"}
+  ${outline ? "hover:bg-neutral-50" : ""}
   ${small ? "py-1" : "py-3"}
   ${small ? "text-sm" : "text-base"}
   ${small ? "font-light" : "font-semibold"}

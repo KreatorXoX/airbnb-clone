@@ -102,7 +102,14 @@ export default function UserAccount({ currentUser }: Props) {
                 />
                 <AccountItem onClick={onRent} label="Airbnb my home" />
                 <div className="w-full bg-gray-200 h-[1px] my-2"></div>
-                <AccountItem onClick={signOut} label="Logout" />
+                <AccountItem
+                  onClick={() =>
+                    signOut({
+                      callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL}`,
+                    })
+                  }
+                  label="Logout"
+                />
               </>
             ) : (
               <>
