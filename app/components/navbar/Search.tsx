@@ -1,9 +1,14 @@
 "use client";
+import { useSearchFilters } from "@/app/hooks/useSearchFilters";
 import React from "react";
 import { BiSearch } from "react-icons/bi";
 export default function Search() {
+  const { onOpen } = useSearchFilters();
   return (
-    <div className="border w-full md:w-fit py-2 rounded-full shadow-md md:shadow-sm hover:shadow-md cursor-pointer">
+    <div
+      onClick={() => onOpen()}
+      className="border w-full md:w-fit py-2 rounded-full shadow-md md:shadow-sm hover:shadow-md cursor-pointer"
+    >
       <div className="flex ml-10 md:ml-5 items-start text-xs md:items-center md:justify-between flex-col md:flex-row">
         <div className="truncate font-bold md:text-sm px-5 ">Anywhere</div>
         <div className="flex items-center justify-start">

@@ -11,6 +11,7 @@ import { font } from "./fonts";
 import SmallUserAccount from "./components/navbar/SmallUserAccount";
 
 import RentModal from "./components/modals/RentModal";
+import SearchModal from "./components/modals/SearchModal";
 
 export const metadata: Metadata = {
   title: "Airbnb Clone",
@@ -32,6 +33,7 @@ export default async function RootLayout({
         <RegisterModal />
         <LoginModal />
         <RentModal />
+        <SearchModal />
         <ToasterProvider />
         <div className="absolute bottom-0 w-full md:hidden">
           <SmallUserAccount currentUser={currentUser} />

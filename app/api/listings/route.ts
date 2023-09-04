@@ -4,6 +4,8 @@ import prisma from "@/app/lib/prismadb";
 import cloudinary from "@/app/lib/cloudinary";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 
+import { revalidatePath } from "next/cache";
+
 export async function POST(req: NextRequest) {
   const body = await req.json();
 
@@ -61,6 +63,8 @@ export async function POST(req: NextRequest) {
         statusText: "Failed to create new listing in Prisma",
       });
     }
+
+    //revalidatePath("/");
 
     return NextResponse.json(listing);
   } catch (error) {

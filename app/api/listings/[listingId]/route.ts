@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/lib/prismadb";
 import cloudinary from "@/app/lib/cloudinary";
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import { revalidatePath } from "next/cache";
 
 type Params = {
   listingId?: string;
@@ -48,6 +49,8 @@ export async function DELETE(req: Request, { params }: { params: Params }) {
         statusText: "Failed to delete listing in Prisma",
       });
     }
+
+    //revalidatePath("/");
 
     cloudinary.uploader.destroy(listing.imageSrc.key);
 

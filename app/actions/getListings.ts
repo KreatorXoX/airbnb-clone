@@ -1,10 +1,16 @@
 import prisma from "@/app/lib/prismadb";
 import { Listing } from "@prisma/client";
+import { cache } from "react";
 
 export type ListingParams = {
   userId?: string;
 };
-export default async function getListings(params: ListingParams) {
+
+// export const revalidate = 3600;
+// cached and revalidated listings every one hour.
+//  cache(async (params: ListingParams) => {
+
+const getListings = async (params: ListingParams) => {
   try {
     const { userId } = params;
 
@@ -25,4 +31,6 @@ export default async function getListings(params: ListingParams) {
   } catch (error) {
     console.log(error);
   }
-}
+};
+
+export default getListings;

@@ -2,10 +2,17 @@ import prisma from "@/app/lib/prismadb";
 import { IUser } from "@/types";
 import { Listing, User } from "@prisma/client";
 
+import { cache } from "react";
+
 type Params = {
   listingId?: string;
 };
-export default async function getListingById(params: Params) {
+
+//export const revalidate = 3600;
+// cached and revalidated listing every one hour.
+//cache(async (params: Params) => {
+
+const getListingById = async (params: Params) => {
   try {
     const listing = await prisma.listing.findUnique({
       where: {
@@ -49,4 +56,6 @@ export default async function getListingById(params: Params) {
   } catch (error) {
     console.log(error);
   }
-}
+};
+
+export default getListingById;

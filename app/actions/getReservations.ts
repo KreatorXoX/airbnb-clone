@@ -1,6 +1,5 @@
 import prisma from "@/app/lib/prismadb";
 import { IReservation } from "@/types";
-import { Listing, Reservation } from "@prisma/client";
 
 type Params = {
   listingId?: string;
