@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { AnimatePresence } from "framer-motion";
 import { AiOutlineHome } from "react-icons/ai";
 import { BsDoorOpen } from "react-icons/bs";

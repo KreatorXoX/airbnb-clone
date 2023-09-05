@@ -10,7 +10,6 @@ import ListingInfo from "./ListingInfo";
 
 import useAmenities from "@/app/hooks/useAmenities";
 import Map from "../Map";
-import ShowLocationMap from "../ShowLocationMap";
 
 type Props = {
   user: IUser | null;
@@ -122,7 +121,7 @@ export default function ListingBody({
       </div>
       <hr />
       {/* location of the place */}
-      <ShowLocationMap zoom={zoom} coordinates={coordinates} />
+      <Map givenLatLng={coordinates} givenZoom={zoom} staticMap />
     </div>
   );
 }

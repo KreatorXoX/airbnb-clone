@@ -71,14 +71,16 @@ export default function ProfileClient({ currentUser }: Props) {
             </div>
           </div>
           <hr />
-          <Button
-            outline
-            label="Logout"
-            onClick={() =>
-              signOut({ callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL}` })
-            }
-            icon={PiPower}
-          />
+          <div className="pb-10">
+            <Button
+              outline
+              label="Logout"
+              onClick={() =>
+                signOut({ callbackUrl: `${process.env.NEXT_PUBLIC_BASE_URL}` })
+              }
+              icon={PiPower}
+            />
+          </div>
         </div>
       </div>
     </ClientContainer>

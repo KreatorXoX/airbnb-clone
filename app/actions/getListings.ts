@@ -4,6 +4,14 @@ import { cache } from "react";
 
 export type ListingParams = {
   userId?: string;
+  location?: string;
+  bedroomCount?: number;
+  bedCount?: number;
+  bathroomCount?: number;
+  guestCount?: number;
+  startDate?: string;
+  endDate?: string;
+  category?: string;
 };
 
 // export const revalidate = 3600;
@@ -12,12 +20,63 @@ export type ListingParams = {
 
 const getListings = async (params: ListingParams) => {
   try {
-    const { userId } = params;
+    const {
+      userId,
+      location,
+      bedroomCount,
+      bedCount,
+      bathroomCount,
+      guestCount,
+      startDate,
+      endDate,
+      category,
+    } = params;
 
     let query: any = {};
 
     if (userId) {
       query.userId = userId;
+    }
+    if (location) {
+      query.location = {
+        is: { value: location },
+      };
+    }
+    if (bedroomCount) {
+      query.bedroomCount = {
+        gte: +bedroomCount,
+      };
+    }
+    if (bedCount) {
+      query.bedCount = {
+        gte: +bedCount,
+      };
+    }
+    if (bathroomCount) {
+      query.bathroomCount = {
+        gte: +bathroomCount,
+      };
+    }
+    if (guestCount) {
+      query.guestCount = {
+        gte: +guestCount,
+      };
+    }
+    if (category) {
+      query.category = { equals: category };
+    }
+
+    if (startDate && endDate) {
+      query.NOT = {
+        reservations: {
+          some: {
+            OR: [
+              { endDate: { gte: startDate }, startDate: { lte: endDate } },
+              { startDate: { lte: endDate }, endDate: { gte: endDate } },
+            ],
+          },
+        },
+      };
     }
 
     const listings = await prisma.listing.findMany({
