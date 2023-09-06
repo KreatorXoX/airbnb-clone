@@ -9,7 +9,7 @@ import { BiSolidUserCircle } from "react-icons/bi";
 import { useRentalModal } from "../hooks/useRent";
 import Button from "../components/Button";
 import { signOut } from "next-auth/react";
-import { PiUserCircleLight, PiPower, PiGear } from "react-icons/pi";
+import { PiUserCircleLight, PiPower, PiGear, PiHouse } from "react-icons/pi";
 
 type Props = { currentUser: IUser };
 
@@ -61,14 +61,21 @@ export default function ProfileClient({ currentUser }: Props) {
             />
           </div>
           <div className="flex flex-col gap-6 md:flex-row md:gap-20 md:justify-center">
-            <div className="flex gap-3 items-center">
+            <button className="flex gap-3 items-center">
               <PiUserCircleLight size={28} />
               <h3 className="font-light">Personal info</h3>
-            </div>
-            <div className="flex gap-3 items-center">
+            </button>
+            <button className="flex gap-3 items-center">
               <PiGear size={28} />
               <h3 className="font-light">Account</h3>
-            </div>
+            </button>
+            <button
+              onClick={() => router.push("/my-properties")}
+              className="flex gap-3 items-center"
+            >
+              <PiHouse size={28} />
+              <h3 className="font-light">My Properties</h3>
+            </button>
           </div>
           <hr />
           <div className="pb-10">

@@ -41,7 +41,7 @@ export default function ImageUploader({ onChange, value }: Props) {
                     fill
                     sizes="100vw"
                     src={value}
-                    className="rounded-lg object-fill"
+                    className="rounded-lg object-cover object-center"
                   />
                 </div>
               )}

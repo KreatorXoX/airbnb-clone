@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import ReactMapGl, {
   Marker,
   ViewState,
@@ -8,13 +9,15 @@ import ReactMapGl, {
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { FaLocationDot, FaHouse } from "react-icons/fa6";
+import { MapListing } from "@/types";
+import Image from "next/image";
 
 type Props = {
   onChangingLocation?: (location: number[], zoom: number) => void;
   givenLatLng?: number[];
   givenZoom?: number;
   staticMap?: boolean;
-  listingLocations?: number[][];
+  listingLocations?: MapListing[];
   fullHeight?: boolean;
 };
 export default function Map({
@@ -33,6 +36,11 @@ export default function Map({
     pitch: 0,
   });
 
+  const router = useRouter();
+
+  const [isMoving, setIsMoving] = useState<boolean>(false);
+  const [listingInfo, setListingInfo] = useState<MapListing>();
+
   useEffect(() => {
     if (givenLatLng) {
       setViewport((prev) => {
@@ -45,8 +53,6 @@ export default function Map({
     }
   }, [givenLatLng]);
 
-  const [isMoving, setIsMoving] = useState<boolean>(false);
-
   const onMapDrag = (evt: ViewStateChangeEvent) => {
     if (staticMap) {
       return setViewport(evt.viewState);
@@ -58,7 +64,7 @@ export default function Map({
   return (
     <div
       className={`w-full ${
-        fullHeight ? "h-[70vh]" : "h-[40vh] md:h-[50vh]"
+        fullHeight ? "h-[40vh] sm:h-[70vh]" : "h-[40vh] md:h-[50vh]"
       } relative`}
     >
       {!staticMap && (
@@ -89,7 +95,7 @@ export default function Map({
         {...viewport}
         minZoom={6}
         maxZoom={15}
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%", borderRadius: "20px" }}
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN!}
         mapStyle="mapbox://styles/gorkem-dev/cl96dwpib009m14l3qxut1j2j"
         onMove={(evt) => onMapDrag(evt)}
@@ -102,20 +108,75 @@ export default function Map({
         }
       >
         {staticMap && givenLatLng && !listingLocations && (
-          <Marker latitude={givenLatLng[0]} longitude={givenLatLng[1]} />
+          <Marker
+            latitude={givenLatLng[0]}
+            longitude={givenLatLng[1]}
+            color="rgb(244 63 94)"
+          />
         )}
         {staticMap &&
           givenLatLng &&
           listingLocations &&
-          listingLocations.map((location, idx) => {
+          listingLocations.map((listing) => {
             return (
-              <Marker
-                key={idx}
-                latitude={location.at(0)!}
-                longitude={location.at(1)!}
-                scale={0.75}
-                color="rgb(244 63 94)"
-              />
+              <div key={listing.id}>
+                <Marker
+                  latitude={listing.location.lat}
+                  longitude={listing.location.lng}
+                  scale={0.75}
+                  color="rgb(244 63 94)"
+                  onClick={() => {
+                    setListingInfo({
+                      id: listing.id,
+                      location: {
+                        lat: listing.location.lat,
+                        lng: listing.location.lng,
+                      },
+                      title: listing.title,
+                      price: listing.price,
+                      imageUrl: listing.imageUrl,
+                    });
+                  }}
+                />
+                {listingInfo && (
+                  <div className="relative">
+                    <div className=" min-w-[12rem] w-[30vw] absolute top-0 z-20">
+                      <div className="flex flex-col justify-center items-center">
+                        <div
+                          className="cursor-pointer 
+                          hover:bg-rose-500 hover:text-white transition
+                          text-rose-500 bg-white rounded-full p-3 text-xs relative"
+                          onClick={() => setListingInfo(undefined)}
+                        >
+                          <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                            x
+                          </span>
+                        </div>
+                        <div
+                          onClick={() => {
+                            router.push(`/listings/${listingInfo.id}`);
+                          }}
+                          className="
+                          cursor-pointer
+                          bg-slate-300/20 w-full h-full flex flex-col justify-center gap-2 px-2 py-1"
+                        >
+                          <p className="truncate">{listingInfo.title}</p>
+                          <span>$ {listingInfo.price.toFixed(2)}</span>
+                          <div className="relative h-[10rem]">
+                            <Image
+                              alt="listingImage"
+                              src={listingInfo.imageUrl}
+                              fill
+                              sizes="100vw"
+                              className="object-center object-cover"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             );
           })}
       </ReactMapGl>

@@ -23,6 +23,17 @@ interface IReservation {
   listing: Listing;
 }
 
+type MapListing = {
+  id: string;
+  imageUrl: string;
+  title: string;
+  price: number;
+  location: {
+    lat: number;
+    lng: number;
+  };
+};
+
 type ListingPlace = {
   category: string;
   type: "entire" | "room" | "shared";

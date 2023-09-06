@@ -84,10 +84,10 @@ export default function ListingItem({
           <Image
             priority
             fill
-            sizes="33vw"
+            sizes="100vw"
             src={listing.imageSrc.url}
             alt="listing"
-            className="object-cover h-full w-full group-hover:scale-105 transition"
+            className="object-cover  object-center h-full w-full group-hover:scale-105 transition"
           />
           <div className="absolute top-3 right-3">
             <FavouriteButton listingId={listing.id} currentUser={currentUser} />

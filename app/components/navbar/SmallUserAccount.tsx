@@ -82,6 +82,7 @@ export default function SmallUserAccount({ currentUser }: Props) {
               alt="mini logo"
               width={24}
               height={20}
+              style={{ width: "auto", height: "auto" }}
             />
             <span className=" truncate text-gray-600">Trips</span>
           </button>
