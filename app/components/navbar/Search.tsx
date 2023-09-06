@@ -25,7 +25,18 @@ export default function Search() {
     if (initialQuery.startDate && initialQuery.endDate) {
       const start = new Date(initialQuery.startDate as string);
       const end = new Date(initialQuery.endDate as string);
-      return `${start.toDateString()} - ${end.toDateString()}`;
+
+      const startDay = start.getDate();
+      const endDay = end.getDate();
+
+      const startMonth = start.toLocaleDateString("en-US", { month: "short" });
+      const endMonth = end.toLocaleDateString("en-US", { month: "short" });
+
+      if (startMonth === endMonth) {
+        return `${startDay} - ${endDay} ${startMonth}`;
+      } else {
+        return `${startDay} ${startMonth} - ${endDay} ${endMonth}`;
+      }
     }
     return "Any Week";
   }, [initialQuery.startDate, initialQuery.endDate]);

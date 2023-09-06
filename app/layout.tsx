@@ -12,6 +12,8 @@ import SmallUserAccount from "./components/navbar/SmallUserAccount";
 
 import RentModal from "./components/modals/RentModal";
 import SearchModal from "./components/modals/SearchModal";
+import { Suspense } from "react";
+import DummyNavbar from "./components/navbar/DummyNavbar";
 
 export const metadata: Metadata = {
   title: "Airbnb Clone",
@@ -29,11 +31,15 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <Navbar currentUser={currentUser} />
+        <Suspense fallback={<DummyNavbar />}>
+          <Navbar currentUser={currentUser} />
+        </Suspense>
         <RegisterModal />
         <LoginModal />
         <RentModal />
-        <SearchModal />
+        <Suspense fallback={<div>Search Modal</div>}>
+          <SearchModal />
+        </Suspense>
         <ToasterProvider />
         <div className="absolute bottom-0 w-full md:hidden">
           <SmallUserAccount currentUser={currentUser} />

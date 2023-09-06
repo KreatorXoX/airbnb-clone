@@ -14,12 +14,16 @@ type Props = {
   givenLatLng?: number[];
   givenZoom?: number;
   staticMap?: boolean;
+  listingLocations?: number[][];
+  fullHeight?: boolean;
 };
 export default function Map({
   givenLatLng,
   givenZoom,
   onChangingLocation,
   staticMap,
+  listingLocations,
+  fullHeight,
 }: Props) {
   const [viewport, setViewport] = useState<Partial<ViewState>>({
     latitude: givenLatLng ? givenLatLng[0] : 44.50195139835563,
@@ -44,12 +48,19 @@ export default function Map({
   const [isMoving, setIsMoving] = useState<boolean>(false);
 
   const onMapDrag = (evt: ViewStateChangeEvent) => {
+    if (staticMap) {
+      return setViewport(evt.viewState);
+    }
     setViewport(evt.viewState);
     setIsMoving(true);
   };
 
   return (
-    <div className="w-full h-[40vh] md:h-[50vh] relative">
+    <div
+      className={`w-full ${
+        fullHeight ? "h-[70vh]" : "h-[40vh] md:h-[50vh]"
+      } relative`}
+    >
       {!staticMap && (
         <>
           <span
@@ -81,7 +92,7 @@ export default function Map({
         style={{ width: "100%", height: "100%" }}
         mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN!}
         mapStyle="mapbox://styles/gorkem-dev/cl96dwpib009m14l3qxut1j2j"
-        onMove={staticMap ? undefined : (evt) => onMapDrag(evt)}
+        onMove={(evt) => onMapDrag(evt)}
         onMoveEnd={
           staticMap
             ? undefined
@@ -90,9 +101,23 @@ export default function Map({
               }
         }
       >
-        {staticMap && givenLatLng && (
+        {staticMap && givenLatLng && !listingLocations && (
           <Marker latitude={givenLatLng[0]} longitude={givenLatLng[1]} />
         )}
+        {staticMap &&
+          givenLatLng &&
+          listingLocations &&
+          listingLocations.map((location, idx) => {
+            return (
+              <Marker
+                key={idx}
+                latitude={location.at(0)!}
+                longitude={location.at(1)!}
+                scale={0.75}
+                color="rgb(244 63 94)"
+              />
+            );
+          })}
       </ReactMapGl>
       {!staticMap && (
         <div className="absolute left-[45%] top-[45%] z-10 flex flex-col">
